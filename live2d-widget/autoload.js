@@ -1,4 +1,4 @@
-<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>const live2d_path = "./";
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>const live2d_path = "https://kkkiona.github.io/live2d-widget/";
 //const live2d_path = "./";
 
 $("<link>").attr({href: live2d_path + "https://kkkiona.github.io/live2d-widget/waifu.css", rel: "stylesheet", type: "text/css"}).appendTo("head");
