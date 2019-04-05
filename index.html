@@ -159,6 +159,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SVG 图片验证码解码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/05/SVG 图片验证码解码/">SVG 图片验证码解码</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/05/SVG 图片验证码解码/" class="archive-article-date">
+  	<time datetime="2019-04-05T13:28:43.169Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>环境：<strong>Python 3</strong><br>外部依赖：<strong>requests、bs4、BeautifulSoup、base64</strong><br>先看题目：<br><img src="https://img-blog.csdnimg.cn/20190405204704211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>题目类似于公式计算的那道题只是公式变成了图片验证码，所以关于爬虫和网页请求请看<a href="https://kkkiona.github.io/2019/04/05/Python%20%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%8A%93%E5%8F%96%E5%92%8C%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95/">https://kkkiona.github.io/2019/04/05/Python%20%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%8A%93%E5%8F%96%E5%92%8C%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95/</a><br>下面是解题过程：<br><strong>查看网页代码</strong><br><img src="https://img-blog.csdnimg.cn/20190405205135120.png" alt="在这里插入图片描述"><br>是用SVG制作的图片并且采用了base64进行了加密。由于作者有一些canvas的使用经验，因此对SVG也有所了解，这里简单说一下。SVG是一种适量绘制技术，与HTML5的canvas技术相比最大的区别就是，canvas有与之关联的JavaScript API 但是SVG是通过xml来控制的。SVG的绘制质量运行速率也不如canvas，好处就是易于控制。后期我会发一篇详细的介绍。<br>回归主题，<strong>把这个图片单独拿出来看一下</strong><br><img src="https://img-blog.csdnimg.cn/20190405205803108.png" alt="在这里插入图片描述"><br>就是这个样子，可以看到URL的base64后面跟了一大堆乱码，这就是加密的xml文档，F12可以看到解密以后的样子，当然也可以通过各种解密工具查看。<img src="https://img-blog.csdnimg.cn/20190405210000422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那么我们就有两种思路，第一种就是像这样靠浏览器来解码然后抓解码后的内容，如果这么做就完全变成抓包游戏了，所以我更推荐第二种<strong>本地解码</strong>。<br><strong>先抓取题目的原始页面，然后通过简单的字符切割获取那段乱码字符串</strong>，方法见上面链接，这里只给出代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(url)</span><br><span class="line">soup = BeautifulSoup(response.text, &quot;html.parser&quot;)</span><br><span class="line">src = soup.find(&quot;img&quot;).get(&quot;src&quot;).split(&apos;,&apos;)[1]</span><br></pre></td></tr></table></figure>
+<p><strong>接下来重点就是解码，使用base64包解码。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line">enc = base64.b64decode(src)</span><br></pre></td></tr></table></figure>
+<p>可以把解码后的内容打印输出看一下，会发现跟浏览器的显示一样这里就不放图片了。<br>下面的内容就很简单了，上方连接使用的关键字提取方法一样，只需要把text标签里面的内容提取出来组和并提交就可以了。但是结果会发现提交的结果是Wrong。<br>仔细观察图片和浏览器里的解码后的代码会发现<br><img src="https://img-blog.csdnimg.cn/20190405211041539.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20190405211052899.png" alt="在这里插入图片描述"><br>text中字符的排列顺序并不是想要的顺序，如上代码的前两个字符是D u 但是图片是t S。原来图片中的字符顺序是根据<strong>x轴</strong>的位置决定的，那么我们就需要对获取的<strong>文本重新排序</strong>了。</p>
+<p>鉴于我的Python学的跟shi一样（正在重学）所以以下内容仅供参考，比我方法好的比比皆是。</p>
+<p><strong>将解码的文件转换为BeautifulSoup对象</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup = BeautifulSoup(enc, &quot;xml&quot;)</span><br></pre></td></tr></table></figure>
+<p><strong>查找所有text标签并返回tag对象，将tag对象的x轴的值转换为int类，并且连同text里面的字符逐个付给一个空的list列表。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List = []</span><br><span class="line"></span><br><span class="line">for tag in soup.find_all(&apos;text&apos;):</span><br><span class="line">    List.append([int(tag[&apos;x&apos;]), tag.string])</span><br></pre></td></tr></table></figure>
+<p>tag是soup.find()返回的对象类型，具体关于<strong>BeautifuSsoup</strong>的使用可以参考官文<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/</a></p>
+<p><strong>接下来只需要使用list的排序功能就可以了</strong>，由于我把x的值作为了第一个属性所以无需指定排序关键字，放到第二个的话需要手动指定，步骤很简单自行搜索即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List.sort()</span><br></pre></td></tr></table></figure>
+<p>可以输出看一下字符的顺序按照离x轴的距离拍好了。最后取出里面的字符组合起来就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getString = &quot;&quot;</span><br><span class="line"></span><br><span class="line">for c in List:</span><br><span class="line">    getString += c[1]</span><br></pre></td></tr></table></figure>
+<p>剩下的就是提交了这里就不重复了。<br>最后结果<br><img src="https://img-blog.csdnimg.cn/20190405212536220.png" alt="在这里插入图片描述"><br>OK，最后完整代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">import base64</span><br><span class="line"></span><br><span class="line">url = &quot;http://example.com/&quot;</span><br><span class="line"></span><br><span class="line">response = requests.get(url)</span><br><span class="line"></span><br><span class="line">Cookies = response.cookies</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(response.text, &quot;html.parser&quot;)</span><br><span class="line"></span><br><span class="line">src = soup.find(&quot;img&quot;).get(&quot;src&quot;).split(&apos;,&apos;)[1]</span><br><span class="line"></span><br><span class="line">enc = base64.b64decode(src)</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(enc, &quot;xml&quot;)</span><br><span class="line"></span><br><span class="line">List = []</span><br><span class="line"></span><br><span class="line">for tag in soup.find_all(&apos;text&apos;):</span><br><span class="line">    List.append([int(tag[&apos;x&apos;]), tag.string])</span><br><span class="line"></span><br><span class="line">List.sort()</span><br><span class="line"></span><br><span class="line">getString = &quot;&quot;</span><br><span class="line"></span><br><span class="line">for c in List:</span><br><span class="line">    getString += c[1]</span><br><span class="line"></span><br><span class="line">response = requests.get(url + &quot;?code=&quot; + getString, cookies = Cookies)</span><br><span class="line"></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+<p>最最后附上Python的其他编码解码方式。转载：<br><a href="https://blog.csdn.net/five3/article/details/83626446" target="_blank" rel="noopener">https://blog.csdn.net/five3/article/details/83626446</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/05/SVG 图片验证码解码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python 简单的网页抓取和提交表单" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
