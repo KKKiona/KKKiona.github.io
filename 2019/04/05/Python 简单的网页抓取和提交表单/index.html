@@ -12,7 +12,7 @@
 <meta name="keywords" content="Web Security">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 简单的网页抓取和提交表单">
-<meta property="og:url" content="https://kkkiona.github.io/2019/04/04/Python 简单的网页抓取和提交表单/index.html">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/05/Python 简单的网页抓取和提交表单/index.html">
 <meta property="og:site_name" content="Kiona">
 <meta property="og:description" content="环境说明：Python 3外部依赖：requests、bs4、BeautifulSoup先看题目 题目很简单，就是限时计算给出的算式并提交。方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。方法二、使用网络爬虫。爬虫的话自然使用Python是最方便不过的，大体思路就是抓取公式-&amp;gt;计算-&amp;gt;提交。既然是做题那么首先第一步肯定是化简，做题最讨">
 <meta property="og:locale" content="zh-Hans">
@@ -26,8 +26,8 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190404202313750.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190404203736138.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190404204349618.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190404205502901.png">
-<meta property="og:updated_time" content="2019-04-04T13:00:19.443Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190405085333732.png">
+<meta property="og:updated_time" content="2019-04-05T00:55:05.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 简单的网页抓取和提交表单">
 <meta name="twitter:description" content="环境说明：Python 3外部依赖：requests、bs4、BeautifulSoup先看题目 题目很简单，就是限时计算给出的算式并提交。方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。方法二、使用网络爬虫。爬虫的话自然使用Python是最方便不过的，大体思路就是抓取公式-&amp;gt;计算-&amp;gt;提交。既然是做题那么首先第一步肯定是化简，做题最讨">
@@ -182,8 +182,8 @@
   
 
         
-        <a href="/2019/04/04/Python 简单的网页抓取和提交表单/" class="archive-article-date">
-  	<time datetime="2019-04-04T12:59:23.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
+        <a href="/2019/04/05/Python 简单的网页抓取和提交表单/" class="archive-article-date">
+  	<time datetime="2019-04-05T00:53:40.817Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-05</time>
 </a>
         
       </header>
@@ -205,7 +205,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookies = response.cookies</span><br></pre></td></tr></table></figure>
 <p><strong>修改二次请求</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/?answer=&quot; + &apos;%d&apos; % Sum, cookies=Cookies)</span><br></pre></td></tr></table></figure>
-<p>再来看一下结果<br><img src="https://img-blog.csdnimg.cn/20190404205502901.png" alt="在这里插入图片描述"><br>成功！<br>总结：<strong>这道题比较基础，简单的使用了Python的爬虫功能，主要是学习了HTTP请求的过程，关键在于cookies的传递。</strong><br>后面打算写一篇关于POST传递的使用方式和详细的HTTP请求的相关知识</p>
+<p>再来看一下结果<br><img src="https://img-blog.csdnimg.cn/20190405085333732.png" alt="在这里插入图片描述"><br>成功！<br>总结：<strong>这道题比较基础，简单的使用了Python的爬虫功能，主要是学习了HTTP请求的过程，关键在于cookies的传递。</strong><br>后面打算写一篇关于POST传递的使用方式和详细的HTTP请求的相关知识</p>
 
       
 
@@ -285,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://kkkiona.github.io/2019/04/04/Python 简单的网页抓取和提交表单/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://kkkiona.github.io/2019/04/05/Python 简单的网页抓取和提交表单/" alt="微信分享二维码">
     </div>
 </div>
 
