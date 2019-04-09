@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://kkkiona.github.io">
-  <title>Kiona</title>
+  <title>XSS 题目解析（上篇） | Kiona</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
 <meta name="keywords" content="Web Security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kiona">
+<meta property="og:title" content="XSS 题目解析（上篇）">
 <meta property="og:url" content="https://kkkiona.github.io/2019/04/09/XSS 题目解析（上篇）/index.html">
 <meta property="og:site_name" content="Kiona">
 <meta property="og:description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
@@ -43,9 +43,9 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115611316.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115933536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409120223157.png">
-<meta property="og:updated_time" content="2019-04-09T06:51:23.516Z">
+<meta property="og:updated_time" content="2019-04-09T07:43:16.842Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kiona">
+<meta name="twitter:title" content="XSS 题目解析（上篇）">
 <meta name="twitter:description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190409094634623.png">
   
@@ -188,6 +188,21 @@
           <div id="js-content" class="content-ll">
             <article id="post-XSS 题目解析（上篇）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      XSS 题目解析（上篇）
+    </h1>
+  
+
+        
+        <a href="/2019/04/09/XSS 题目解析（上篇）/" class="archive-article-date">
+  	<time datetime="2019-04-09T06:50:56.332Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
