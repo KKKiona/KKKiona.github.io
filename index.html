@@ -159,6 +159,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-XSS 题目解析 （下篇）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/XSS 题目解析 （下篇）/">XSS 题目解析（下篇）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/09/XSS 题目解析 （下篇）/" class="archive-article-date">
+  	<time datetime="2019-04-09T07:40:46.039Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>第三题：XSS 2</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190409133601270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一样的题目，只不过xss.php文件不一样，直接点进去看看。<br><img src="https://img-blog.csdnimg.cn/20190409133842466.png" alt="在这里插入图片描述"><br>这个页面你输入什么东西都会被转换成字符串无论是”、&lt;、&gt; 还是Unicode编码。<br><img src="https://img-blog.csdnimg.cn/20190409134026221.png" alt="在这里插入图片描述"><br>可以发现敏感字符被转义了，Unicode被原样变换成了纯字符。</p>
+<p>刚开始会有种手足无措的感觉，因为无论编码还是构造错误语法都没法突破。我决定按部就班从源头入手。<br>先来搞清楚出题者是怎么实现这个转换功能的。既然是php文件我认为这个转换也是依靠的php。果然php中的addslashes()方法会把内容无脑转成字符串从而让恶意代码失效。那么就可以查阅一下怎样绕过addslashes()了。这里我只说一下本题的解法，各种绕过姿势详见<a href="https://bbs.ichunqiu.com/thread-10899-1-1.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-10899-1-1.html</a><br>
+        
+          <a class="article-more-a" href="/2019/04/09/XSS 题目解析 （下篇）/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/09/XSS 题目解析 （下篇）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XSS 题目解析（上篇）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -743,81 +810,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/04/04/关于Python的使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-first blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/first blog/">First Article</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/03/first blog/" class="archive-article-date">
-  	<time datetime="2019-04-03T12:24:54.992Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>早上看了一下之前的Github实在是不忍直视<br><img src="https://img-blog.csdnimg.cn/20190403201220137.jpg" alt="在这里插入图片描述"><br>还是重新制作一个吧。<br>使用的是hexo搭建的博客，步骤比较简单。但是在themes选择上真的是强迫症患者的噩梦<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。<br>偏偏就喜欢上了一个已经停止维护的yilia主题，尝试了无数次修改buffer大小之后依然无法使用HTTP下载，还是ssh吧。<br>下载下来之后更是bug一大堆，比如tag。修改了半天总算是基本正常了。</p>
-<p>既然是新做的博客必须好好搞一下，从网易云拉了音乐，另外搞了一下午的图灵机器人，而且失败了。<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。其实hexo 是自带Live2D功能的，但是想做一个高大上的带交友功能的机器人。然而node.js不熟悉挂接图灵接口的时候就是不行，最后无奈先用自带的吧。明天开始研究信息安全。有时间再搞图灵。。<img src="https://img-blog.csdnimg.cn/2019040320224889.gif" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/03/first blog/">展开全文 >></a>
         </p>
       
 
