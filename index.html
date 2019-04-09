@@ -162,21 +162,6 @@
     <article id="post-XSS 题目解析（上篇）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/09/XSS 题目解析（上篇）/">XSS 题目解析（上篇）</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/09/XSS 题目解析（上篇）/" class="archive-article-date">
-  	<time datetime="2019-04-09T04:03:33.734Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
-</a>
-        
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
         <p>在开始解题之前先说一下什么是<strong>Proof Of Work</strong>，一会会用到。<br><img src="https://img-blog.csdnimg.cn/20190409094634623.png" alt="在这里插入图片描述"><br><strong>Proof Of Work</strong> 简称<strong>POW</strong>中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一下就可以了，官方提供了POW的工具但是我的环境没有调试成功等我试验成功了在发出来过程，这里先用自己的Python代码。</p>

