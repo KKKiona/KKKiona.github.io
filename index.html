@@ -159,6 +159,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SSTI服务端模板注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/12/SSTI服务端模板注入/">SSTI服务端模板注入</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/12/SSTI服务端模板注入/" class="archive-article-date">
+  	<time datetime="2019-04-12T09:58:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目：</strong>Confusion 1**<br><img src="https://img-blog.csdnimg.cn/2019041200024452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。<br><img src="https://img-blog.csdnimg.cn/20190412000551404.png" alt="在这里插入图片描述"><br>但其实有不是那么困惑，因为题目里写了QCTF2018。。。</p>
+<p>以下是我整个解这道题的完整过程，由于题目说明里面提示图片很关键，我首先查看的是图片，我知道Python是蛇的意思，所以我认为这道题必然牵扯Python。F12看到<br><img src="https://img-blog.csdnimg.cn/20190412000841591.png" alt="在这里插入图片描述"><br>似乎没啥特别，下载下来看一下，因为我知道有些线索可能写在了图片属性里面，或者图片加密。<br><img src="https://img-blog.csdnimg.cn/20190412001102539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>似乎并无异样。用binwalk跑了一下也没有发现结果。由于知识有限并不清楚还有什么其它图片利用方法，于是我决定先把眼光转向其它线索，题目还提示要找到input的地方。我观察了一下主页面的HTML代码发现并没有被设置为“hidden”的隐藏input标签。</p>
+<p>然而在检查login.php的404的时候发现代码里有线索。<br><img src="https://img-blog.csdnimg.cn/20190412002013965.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190412172416266.png" alt="在这里插入图片描述"><br>看来这个文件里面应该是有我们需要的flag。<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190412002146350.png" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190412002146350.png</a><br>并访问不了。我猜测这个404页面可能做了伪装，虽然题目说了“Scanner is useless”。但是我还是决定用kali扫一下。当然结果肯定是没有什么有用的发现。（我的kali在U盘上，用的是live模式不好截图就不放出来了）。</p>
+<p>我猜测会不会这个页面隐藏了GET参数，可以用来登录之类的。我尝试给比较常见的变量名“user”传递一个值看看有什么反应。<br><img src="https://img-blog.csdnimg.cn/20190412143946595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>没什么反应。感觉有点手足无措，想到之前已经做过XSS和SQL注入的题了，应该不会用XSS来做，但是我决定还是试一下。输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2019041214431671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>出乎意料的竟然执行了。尝试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">Var fso=new ActiveXObject(Scripting.FileSystemObject); </span><br><span class="line">Var f=fso.opentextfile(“http://example.com/opt/flag_example.txt”,1，true); </span><br><span class="line">s = f.ReadAll(); </span><br><span class="line">document.write(s);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190412145655665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以看到网站非常“委婉”的提示我们不要这么做。不过也就是说这么做也可以但是这里不提倡，之前做XSS的时候我就浏览过一些如何绕过这种弹窗保护机制，我觉得应该有可行之处，但是我还是希望能够按照正规步骤做题。</p>
+<p>最终限于知识贫乏我只能去搜一下QCTF的内容。竟然在里面发现了原题！！</p>
+<p>把源码粘上去发现，<br><img src="https://img-blog.csdnimg.cn/20190412172329150.png" alt="在这里插入图片描述"><br>好了本文结束，这道题目具体做法就是搜一搜。</p>
+<p>~~那是不可能的。既然找到正确答案了我们就必须知其所以然。</p>
+<p>首先我们一开始的工作方向是正确的，我们已经找到了input点。但是这里用到了一个之前没有用过的注入技术。<strong>SSTI服务端门模板注入</strong>。</p>
+<p><strong>SSTI</strong>网上的资料并不多，我查阅了自己的一些书籍，只在专门的web安全书籍（黑客攻防技术宝典（web篇））里面才有相关介绍，可能我查阅不够仔细这个内容在其它书里面只是涵盖在了某个专题里面。</p>
+<p><strong>SSTI</strong>是针对模板进行攻击的。来看一个PHP模板的例子。</p>
+<p>什么是模板，为什么要使用模板？</p>
+<p>模板简单来说就是定义了一个通用的框架，但是框架里面的内容是动态解析的。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;title&gt;&#123;%$cont%&#125;&lt;/title&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个HTML框架里面包含一个title标签但是至于标签里面是什么，现在不知道。</p>
+<p>至于这个cont什么时候去填充，有两种。前端渲染，后端渲染。</p>
+<p>前端渲染就是服务器一股脑把信息给浏览器，浏览器对信息先解析成HTML代码在渲染。</p>
+<p>后端渲染是服务端把信息解析好了直接发给浏览器，浏览器仅进行渲染工作。</p>
+<p>譬如说我们上边的模板页面起名为“index.html”。后端执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$temp-&gt;display(&apos;index.html&apos;, array(&apos;cont&apos; =&gt; $_GET[&apos;title&apos;]));</span><br></pre></td></tr></table></figure>
+<p>这样页面的就变成“title”的值，比如是123，那么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;title&gt;123&lt;/title&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>这令我想到了之前学习的织梦CMS。很显然，凡事用到用户输入的如果不加以处理必然会造成类似XSS的漏洞。题目来看的话这里必然存在后端渲染的漏洞。测试一下，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;7*7&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190412155519443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>前端显示49，这是因为服务端把7*7进行了运算，像PHP的Twig模板不仅可以进行表达式运算还能输出变量的值，也可以用注释符的办法看看能不能输出注释内容来判断是否存在漏洞。由此来看模板漏洞也是因为么有对用户输入过滤引起的。</p>
+<p>不过看了答案之后还是省了很多步骤，比如那张图片暗示了Python，这里的404页面其实不是Apache+PHP的构架，也就是说这里使用的并不是PHP 诸如Twig的模板，而是Python Flask jinja2。</p>
+<p>这样我们只需要了解Flask jinja2的用法就可以找到植入payload的方法。<br>官文 <a href="http://docs.jinkan.org/docs/jinja2/" target="_blank" rel="noopener">http://docs.jinkan.org/docs/jinja2/</a> （其实不用看也可以因为只用到基本语法可以搜一下）</p>
+<p>构造payload。构造payload使用到了Python的内建属性 官文 <a href="https://docs.python.org/2/library/stdtypes.html#file-objects" target="_blank" rel="noopener">https://docs.python.org/2/library/stdtypes.html#file-objects</a><br>由于我的Python还在起步阶段，在参考了大量资料后还是不能完全对这个payload进行最正确的解释（从做题到写文已经一天半了一直在看这个payload），这里给出我认为比较全的一个解释 转载 <a href="https://www.freebuf.com/articles/web/98928.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/98928.html</a><br>简单说一下我的理解就是我们需要用一个类型变量比如说一个空字符串，使用<strong>class</strong>来获取它的类型，并通过<strong>mro</strong>来获取对象的继承类。然后通过索引获取我们目标对象，再用<strong>subclass</strong>列出所有类，通过索引找到“file”类，有了“file”对象后就能使用read()来读取文件了。</p>
+<p>所以payload代码是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40](&apos;/flag.txt&apos;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190412172258345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>获得flag。</p>
+<p>不过QCTF的答案还说到了过滤，虽然这道题目没有用到，但是说一下。</p>
+<p>比如题目对<strong>class</strong>做了过滤的话，可以使用request.args来绕过。这个东西是flask模板里面用于获取GET参数的一个功能，所以我们可以吧<strong>class</strong>定义为字符串变量通过request.args来获取这样就绕过了过滤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&apos;&apos;[request.args.a][request.args.b][2][request.args.c]()[40](&apos;/flag.txt&apos;)[request.args.d]()&#125;&#125;?a=__class__&amp;b=__mro__&amp;c=__subclasses__&amp;d=read</span><br></pre></td></tr></table></figure>
+<p>这个思想类似于之前XSS使用的截取字符串构造 script 的思想。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/12/SSTI服务端模板注入/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-随笔-19-4-11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -774,71 +874,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/04/07/XSS 随笔01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-VPS服务器搭建SSR_SS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/06/VPS服务器搭建SSR_SS/">VPS服务器搭建SSR/SS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/06/VPS服务器搭建SSR_SS/" class="archive-article-date">
-  	<time datetime="2019-04-06T06:02:53.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实在是忍受不了国内博客论坛千篇一律的抄袭现象，决定去翻阅一下国外的资料。但又因为国内现成的VPN基本全被封杀，即便是有几个可以用的也会收费并且非常不稳定，于是决定自己动手打一个梯子。<br>服务器：<strong>vultr</strong>（比较实惠、稳定的国外服务器）<br>工具：<strong>xshell</strong>、<strong>shadowstocks</strong>、<strong>bbr</strong>、<strong>代理服务设置工具</strong>（下边会给出链接）<br>首先是搞到服务器，去vultr注册账号。<a href="https://www.vultr.com/" target="_blank" rel="noopener">https://www.vultr.com/</a><br><img src="https://img-blog.csdnimg.cn/20190406122622153.png" alt="在这里插入图片描述"><br>填写邮箱和密码，会给你发个邮件激活账号。<br>
-        
-          <a class="article-more-a" href="/2019/04/06/VPS服务器搭建SSR_SS/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/06/VPS服务器搭建SSR_SS/">展开全文 >></a>
         </p>
       
 
