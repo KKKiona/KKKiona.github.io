@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://kkkiona.github.io">
   <title>SSTI服务端模板注入 | Kiona</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。但其实有不是那么困惑，因为题目里写了QCTF2018。。。 以下是我整个解这道题的完整过程，由于题目说明里面提示图片很关键，我首先查看的是图片，我知道Python是蛇的意思，所以我认为这道题必然牵扯Python。F12看到似乎没啥特别，下载下来看一下，因为我知道有">
+  <meta name="description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。">
 <meta name="keywords" content="Web Security">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSTI服务端模板注入">
 <meta property="og:url" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。但其实有不是那么困惑，因为题目里写了QCTF2018。。。 以下是我整个解这道题的完整过程，由于题目说明里面提示图片很关键，我首先查看的是图片，我知道Python是蛇的意思，所以我认为这道题必然牵扯Python。F12看到似乎没啥特别，下载下来看一下，因为我知道有">
+<meta property="og:description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019041200024452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190412000551404.png">
@@ -28,10 +28,10 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190412172329150.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190412155519443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190412172258345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-04-12T09:59:34.998Z">
+<meta property="og:updated_time" content="2019-04-12T10:01:14.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSTI服务端模板注入">
-<meta name="twitter:description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。但其实有不是那么困惑，因为题目里写了QCTF2018。。。 以下是我整个解这道题的完整过程，由于题目说明里面提示图片很关键，我首先查看的是图片，我知道Python是蛇的意思，所以我认为这道题必然牵扯Python。F12看到似乎没啥特别，下载下来看一下，因为我知道有">
+<meta name="twitter:description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019041200024452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Kiona" type="application/atom+xml">
@@ -191,7 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>题目：</strong>Confusion 1**<br><img src="https://img-blog.csdnimg.cn/2019041200024452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。<br><img src="https://img-blog.csdnimg.cn/20190412000551404.png" alt="在这里插入图片描述"><br>但其实有不是那么困惑，因为题目里写了QCTF2018。。。</p>
+        <p><strong>题目：</strong>Confusion 1**<br><img src="https://img-blog.csdnimg.cn/2019041200024452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。<br><a id="more"></a><br><img src="https://img-blog.csdnimg.cn/20190412000551404.png" alt="在这里插入图片描述"><br>但其实有不是那么困惑，因为题目里写了QCTF2018。。。</p>
 <p>以下是我整个解这道题的完整过程，由于题目说明里面提示图片很关键，我首先查看的是图片，我知道Python是蛇的意思，所以我认为这道题必然牵扯Python。F12看到<br><img src="https://img-blog.csdnimg.cn/20190412000841591.png" alt="在这里插入图片描述"><br>似乎没啥特别，下载下来看一下，因为我知道有些线索可能写在了图片属性里面，或者图片加密。<br><img src="https://img-blog.csdnimg.cn/20190412001102539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>似乎并无异样。用binwalk跑了一下也没有发现结果。由于知识有限并不清楚还有什么其它图片利用方法，于是我决定先把眼光转向其它线索，题目还提示要找到input的地方。我观察了一下主页面的HTML代码发现并没有被设置为“hidden”的隐藏input标签。</p>
 <p>然而在检查login.php的404的时候发现代码里有线索。<br><img src="https://img-blog.csdnimg.cn/20190412002013965.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190412172416266.png" alt="在这里插入图片描述"><br>看来这个文件里面应该是有我们需要的flag。<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190412002146350.png" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190412002146350.png</a><br>并访问不了。我猜测这个404页面可能做了伪装，虽然题目说了“Scanner is useless”。但是我还是决定用kali扫一下。当然结果肯定是没有什么有用的发现。（我的kali在U盘上，用的是live模式不好截图就不放出来了）。</p>
 <p>我猜测会不会这个页面隐藏了GET参数，可以用来登录之类的。我尝试给比较常见的变量名“user”传递一个值看看有什么反应。<br><img src="https://img-blog.csdnimg.cn/20190412143946595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>没什么反应。感觉有点手足无措，想到之前已经做过XSS和SQL注入的题了，应该不会用XSS来做，但是我决定还是试一下。输入</p>
