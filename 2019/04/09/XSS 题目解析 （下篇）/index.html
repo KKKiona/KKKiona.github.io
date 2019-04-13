@@ -174,6 +174,7 @@
 
 
 
+  <link rel="stylesheet" href="/live2d/css/live2d.css">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -1429,5 +1430,19 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?bd2294fafea3389ee458f1d9be5a2157"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+  <div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+  </div>
+  <script type="text/javascript">
+    var message_Path = '/live2d/'
+    var home_Path = 'https://haremu.com/'  //此处修改为你的域名，必须带斜杠
+  </script>
+  <script type="text/javascript" src="/live2d/js/live2d.js"></script>
+  <script type="text/javascript" src="/live2d/js/message.js"></script>
+  <script type="text/javascript">
+      loadlive2d("live2d", "/live2d/model/tia/model.json");
+  </script>
+</body>
 </html>
