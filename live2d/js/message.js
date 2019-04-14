@@ -289,7 +289,9 @@ if(!norunFlag){
 					url: talkAPI,
 					type: 'POST',
 					dataType: 'json',
-					crossDomain: true,
+					headers:{
+						"Access-Control-Allow-Origin":http://openapi.tuling123.com/openapi/
+						},
 					data: {
 						"reqType":0,
 						"perception": {
