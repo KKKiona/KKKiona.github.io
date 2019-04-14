@@ -289,15 +289,7 @@ if(!norunFlag){
 					url: talkAPI,
 					type: 'POST',
 					dataType: 'json',
-					proxyTable: {
-							'/api': {
-							target: 'http://openapi.tuling123.com/openapi',
-							changeOrigin: true    //此项设置允许跨域
-							// pathRewrite: {
-							//     '^/api': '/api'
-							// }
-							}
-						},
+					crossDomain: true,
 					data: {
 						"reqType":0,
 						"perception": {
