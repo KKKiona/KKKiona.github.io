@@ -290,7 +290,7 @@ if(!norunFlag){
 					type: 'POST',
 					dataType: 'json',
 					headers:{
-						"Access-Control-Allow-Origin":http://openapi.tuling123.com/openapi/
+						"Access-Control-Allow-Origin": "http://openapi.tuling123.com/openapi/"
 						},
 					data: {
 						"reqType":0,
