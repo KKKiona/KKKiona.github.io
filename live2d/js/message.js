@@ -302,7 +302,7 @@ if(!norunFlag){
 						}
 					},
 					success: function(res) {
-						if(res.code !== 10005){
+						/*if(res.code !== 10005){
 							talkValTimer();
 							showMessage('似乎有什么错误，请和站长联系！',0);
 						}else{
@@ -311,7 +311,8 @@ if(!norunFlag){
 						}
 						console.log(res);
 						$('#AIuserText').val("");
-						sessionStorage.setItem("live2duser", userid_);
+						sessionStorage.setItem("live2duser", userid_);*/
+						showMessage('似乎有什么错误，请和站长联系！',0);
 					}
 				});
 			});
