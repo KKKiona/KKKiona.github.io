@@ -286,19 +286,28 @@ if(!norunFlag){
 				}
 				showMessage('思考中~', 0);
 				$.ajax({
-					type: 'POST',
 					url: talkAPI,
+					type: 'POST',
+					dataType: 'json',
 					data: {
-						"info":info_,
-						"userid":userid_
+						"reqType":0,
+						"perception": {
+							"inputText": {
+								"text": info_
+							}							
+						},
+						"userInfo": {
+							"apiKey": "39863e373ccf4f85a77d5529b9bf2280",
+							"userId": userid_
+						}
 					},
 					success: function(res) {
-						if(res.code !== 100000){
+						if(res.code !== 10005){
 							talkValTimer();
 							showMessage('似乎有什么错误，请和站长联系！',0);
 						}else{
 							talkValTimer();
-							showMessage(res.text,0);
+							showMessage(res.values,0);
 						}
 						console.log(res);
 						$('#AIuserText').val("");
