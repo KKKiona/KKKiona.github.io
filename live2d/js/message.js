@@ -314,7 +314,10 @@ if(!norunFlag){
 						$('#AIuserText').val("");
 						sessionStorage.setItem("live2duser", userid_);*/
 						showMessage('似乎有什么错误，请和站长联系！',0);
-					}
+					},
+					error:function(result){
+						showMessage('似乎有什么错误，请和站长联系！',0);
+					}	
 				});
 			});
 		}else{
