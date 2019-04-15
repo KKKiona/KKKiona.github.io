@@ -304,7 +304,7 @@ if(!norunFlag){
 					success: function(res) {
 						if(false){
 							talkValTimer();
-							showMessage('图灵错误！',0);
+							showMessage('出错啦！',0);
 						}else{
 							talkValTimer();
 							showMessage(res.values,0);
@@ -314,7 +314,7 @@ if(!norunFlag){
 						sessionStorage.setItem("live2duser", userid_);
 					},
 					error:function(result){
-						showMessage('连接错误',0);
+						showMessage('跨域限制！',0);
 					}	
 				});
 			});
