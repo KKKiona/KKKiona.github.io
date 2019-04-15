@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kkkiona.github.io/"/>
-  <updated>2019-04-14T12:13:19.806Z</updated>
+  <updated>2019-04-15T12:52:30.320Z</updated>
   <id>https://kkkiona.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PHP利用文件包含漏洞</title>
+    <link href="https://kkkiona.github.io/2019/04/15/PHP%E5%88%A9%E7%94%A8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"/>
+    <id>https://kkkiona.github.io/2019/04/15/PHP利用文件包含漏洞/</id>
+    <published>2019-04-15T12:48:21.000Z</published>
+    <updated>2019-04-15T12:52:30.320Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这是一道文件包含漏洞的题目。</p><p>简单介绍一下文件包含，文件包含简单来说就是在一个文件里面引入另一个文件。拿最通俗的C语言来说，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br></pre></td></tr></table></figure></p><p>这就是最简单的文件包含，编一阶段编译器会把stdio.h直接包含进来。</p><p>PHP提供了四种包含方式，分别是include(),include_once(),require()和require_once()。这四个都可以进行文件包含，但有区别</p><p>require 找不到被包含的文件时会产生致命错误(E_COMPILE_ERROR)，并停止脚本。</p><p>include 找不到被包含的文件时只会产生警告(E_WARNING)，脚本继续执行。</p><p>include_once 此语句和include雷系，唯一区别就是如果该文件中的代码已经被包含，则不会再次包含。</p><p>require_once 此语句和require类似，唯一区别就是如果该文件中的代码已经被包含。则不会再次包含。</p><p>如果是静态的文件包含几乎不会出问题，但是如果文件包含是动态的比如</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include($_GET[&apos;&apos;flie&apos;])</span><br></pre></td></tr></table></figure><p>这样裸露的包含外部文件很容易造成恶意代码的注入。<br><a id="more"></a><br><strong>题目</strong></p><p><img src="/2019/04/15/PHP利用文件包含漏洞/Image0001.png" alt><br><img src="/2019/04/15/PHP利用文件包含漏洞/Image0002.png" alt></p><p>这道题是基础的文件包含题目所以不是很难，从题目可以很清楚的看到页面利用了文件包含来实现页面跳转，而我们要的flag文件应该就包含在flag.php里面，我们要做的就是从flag.php源码里面读出来。</p><p>由于我们需要的是获取源码而不是运行flag.php这个文件，所以我们需要访问本地文件，在此顺便补充一下。</p><p>PHP文件包含分为两种，一种是<strong>本地文件包含</strong>，它是通过浏览器包含web服务器上的文件，显然本题目是本地文件包含漏洞。</p><p>第二种是<strong>远程文件包含</strong>，它允许包含远程服务器上的文件，这就允许黑客上传远端payload。这种包含<br>需要确定PHP是否开启远程包含选项 在php.ini文件中修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">allow_url_include=Off              //把Off改为On</span><br></pre></td></tr></table></figure></p><p>由于是PHP页面我们可以使用PHP的方法来获取flag的源码。<br>这里使用的是PHP封装协议（伪协议）。PHP封装协议就是一些内置的URL风格的封装协议。</p><p>常用的有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">file:// — 访问本地文件系统</span><br><span class="line">http:// — 访问 HTTP(s) 网址</span><br><span class="line">ftp:// — 访问 FTP(s) URLs</span><br><span class="line">php:// — 访问各个输入/输出流（I/O streams）</span><br><span class="line">zlib:// — 压缩流</span><br><span class="line">data:// — 数据（RFC 2397）</span><br><span class="line">glob:// — 查找匹配的文件路径模式</span><br><span class="line">phar:// — PHP 归档</span><br><span class="line">ssh2:// — Secure Shell 2</span><br><span class="line">rar:// — RAR</span><br><span class="line">ogg:// — 音频流</span><br><span class="line">expect:// — 处理交互式的流</span><br></pre></td></tr></table></figure></p><p>我们要获取的是流文件，因此我们选用php:// ，同时我们需要一个过滤器filter来过滤数据流。因为流里面的数据很多，我们需要过滤出flag.php的数据。</p><p>所以构造代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://filter/resource=flag</span><br></pre></td></tr></table></figure></p><p>resource参数指定目标文件。同时我们需要read参数来读取文件，这里值得注意的是，文件包含对文件的后缀名并不关心，比如我的文件叫flag.txt ，但是里面使用了合法的盘后票语句，那么read进来以后浏览器依然会把它作为php文件执行，而不是读取内容。哪怕换成.jpg也一样。</p><p>所以在获取php文件的时候要进行base64编码，不然会被执行。</p><p>所以最终我构造的代码是</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://filter/read=convert.base64-encode/resource=flag</span><br></pre></td></tr></table></figure><p>得到一串编码<br><img src="/2019/04/15/PHP利用文件包含漏洞/Image0003.png" alt></p><p>解码之后<br><img src="/2019/04/15/PHP利用文件包含漏洞/Image0004.png" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一道文件包含漏洞的题目。&lt;/p&gt;
+&lt;p&gt;简单介绍一下文件包含，文件包含简单来说就是在一个文件里面引入另一个文件。拿最通俗的C语言来说，&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这就是最简单的文件包含，编一阶段编译器会把stdio.h直接包含进来。&lt;/p&gt;
+&lt;p&gt;PHP提供了四种包含方式，分别是include(),include_once(),require()和require_once()。这四个都可以进行文件包含，但有区别&lt;/p&gt;
+&lt;p&gt;require 找不到被包含的文件时会产生致命错误(E_COMPILE_ERROR)，并停止脚本。&lt;/p&gt;
+&lt;p&gt;include 找不到被包含的文件时只会产生警告(E_WARNING)，脚本继续执行。&lt;/p&gt;
+&lt;p&gt;include_once 此语句和include雷系，唯一区别就是如果该文件中的代码已经被包含，则不会再次包含。&lt;/p&gt;
+&lt;p&gt;require_once 此语句和require类似，唯一区别就是如果该文件中的代码已经被包含。则不会再次包含。&lt;/p&gt;
+&lt;p&gt;如果是静态的文件包含几乎不会出问题，但是如果文件包含是动态的比如&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;include($_GET[&amp;apos;&amp;apos;flie&amp;apos;])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样裸露的包含外部文件很容易造成恶意代码的注入。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>图灵</title>
@@ -340,24 +368,6 @@
   </entry>
   
   <entry>
-    <title>关于Python的使用</title>
-    <link href="https://kkkiona.github.io/2019/04/07/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://kkkiona.github.io/2019/04/07/关于Python的使用/</id>
-    <published>2019-04-07T12:56:59.000Z</published>
-    <updated>2019-04-15T06:08:11.191Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。<br>首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。<br>下面是一些安装问题，你可以去官网下载Python 3并安装，<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a>  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，<a href="https://www.anaconda.com/" target="_blank" rel="noopener">https://www.anaconda.com/</a>  提供了 Python 2，Python 3 两个版本。<br>关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。<a href="https://thonny.org/" target="_blank" rel="noopener">https://thonny.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0001.png" alt><br><a id="more"></a><br>比较常见的是pyCharm，操作模式类似于eclipse，功能强大代，码高亮，自动填写做的很好。项目管理很方便，可以跨平台。可以很方便的管理库文件，添加外部依赖等等。提供了免费及收费两个版本。没什么大缺点，就是对外部包引入的搜索方式有时候会让人头大。明明项目里都显示有package了就是import不进来。<a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/download/#section=windows</a><br><img src="/2019/04/07/关于Python的使用/Image0002.png" alt><br>另外推荐一个交互式笔记本，Jupyter notebook（又称IPython notebook）支持运行超过40种编程语言。安装教程十分简单。跨平台，实时代码编辑。缺点，关键词高亮很差，语法检测很弱，有时候错误语法照样可以运行。<a href="https://jupyter.org/" target="_blank" rel="noopener">https://jupyter.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0003.png" alt><br>对于热衷文本编辑器的人员可以使用sublime，另外C、Java程序员可以使用vs和eclipse。Linux推荐vim。<br>关于同时使用Python 2 和 Python 3，如果确实需要两个环境的话。可以参考这篇文章<a href="https://www.cnblogs.com/zhengyihan1216/p/6011640.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhengyihan1216/p/6011640.html</a><br>简述一下就是安装第一个Python的时候记得把Python.exe改个别名，并且使用pip的时候要对应Python版本，最后分别添加path就可以了。<br>下一篇介绍如何简单的使用 requests package抓取页面和表单提交。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。&lt;br&gt;首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。&lt;br&gt;下面是一些安装问题，你可以去官网下载Python 3并安装，&lt;a href=&quot;https://www.python.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.python.org/&lt;/a&gt;  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，&lt;a href=&quot;https://www.anaconda.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.anaconda.com/&lt;/a&gt;  提供了 Python 2，Python 3 两个版本。&lt;br&gt;关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。&lt;a href=&quot;https://thonny.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://thonny.org/&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/2019/04/07/关于Python的使用/Image0001.png&quot; alt&gt;&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Python 简单的网页抓取和提交表单</title>
     <link href="https://kkkiona.github.io/2019/04/07/Python-%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%8A%93%E5%8F%96%E5%92%8C%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95/"/>
     <id>https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/</id>
@@ -370,6 +380,24 @@
     
       &lt;p&gt;环境说明：&lt;strong&gt;Python 3&lt;/strong&gt;&lt;br&gt;外部依赖：&lt;strong&gt;requests、bs4、BeautifulSoup&lt;/strong&gt;&lt;br&gt;先看题目&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/2019/04/07/Python-简单的网页抓取和提交表单/Image0001.png&quot; alt&gt;&lt;br&gt;题目很简单，就是限时计算给出的算式并提交。&lt;br&gt;&lt;del&gt;方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。&lt;/del&gt;&lt;br&gt;方法二、&lt;strong&gt;使用网络爬虫&lt;/strong&gt;。&lt;br&gt;爬虫的话自然使用Python是最方便不过的，大体思路就是&lt;strong&gt;抓取公式-&amp;gt;计算-&amp;gt;提交&lt;/strong&gt;。&lt;br&gt;既然是做题那么首先第一步肯定是&lt;strong&gt;化简&lt;/strong&gt;，做题最讨厌的不是不会做而是把1+1做成∞+∞。我们先多刷新几次页面看一下。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>关于Python的使用</title>
+    <link href="https://kkkiona.github.io/2019/04/07/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://kkkiona.github.io/2019/04/07/关于Python的使用/</id>
+    <published>2019-04-07T12:56:59.000Z</published>
+    <updated>2019-04-15T06:08:11.191Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。<br>首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。<br>下面是一些安装问题，你可以去官网下载Python 3并安装，<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a>  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，<a href="https://www.anaconda.com/" target="_blank" rel="noopener">https://www.anaconda.com/</a>  提供了 Python 2，Python 3 两个版本。<br>关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。<a href="https://thonny.org/" target="_blank" rel="noopener">https://thonny.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0001.png" alt><br><a id="more"></a><br>比较常见的是pyCharm，操作模式类似于eclipse，功能强大代，码高亮，自动填写做的很好。项目管理很方便，可以跨平台。可以很方便的管理库文件，添加外部依赖等等。提供了免费及收费两个版本。没什么大缺点，就是对外部包引入的搜索方式有时候会让人头大。明明项目里都显示有package了就是import不进来。<a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/download/#section=windows</a><br><img src="/2019/04/07/关于Python的使用/Image0002.png" alt><br>另外推荐一个交互式笔记本，Jupyter notebook（又称IPython notebook）支持运行超过40种编程语言。安装教程十分简单。跨平台，实时代码编辑。缺点，关键词高亮很差，语法检测很弱，有时候错误语法照样可以运行。<a href="https://jupyter.org/" target="_blank" rel="noopener">https://jupyter.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0003.png" alt><br>对于热衷文本编辑器的人员可以使用sublime，另外C、Java程序员可以使用vs和eclipse。Linux推荐vim。<br>关于同时使用Python 2 和 Python 3，如果确实需要两个环境的话。可以参考这篇文章<a href="https://www.cnblogs.com/zhengyihan1216/p/6011640.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhengyihan1216/p/6011640.html</a><br>简述一下就是安装第一个Python的时候记得把Python.exe改个别名，并且使用pip的时候要对应Python版本，最后分别添加path就可以了。<br>下一篇介绍如何简单的使用 requests package抓取页面和表单提交。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。&lt;br&gt;首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。&lt;br&gt;下面是一些安装问题，你可以去官网下载Python 3并安装，&lt;a href=&quot;https://www.python.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.python.org/&lt;/a&gt;  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，&lt;a href=&quot;https://www.anaconda.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.anaconda.com/&lt;/a&gt;  提供了 Python 2，Python 3 两个版本。&lt;br&gt;关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。&lt;a href=&quot;https://thonny.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://thonny.org/&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/2019/04/07/关于Python的使用/Image0001.png&quot; alt&gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -419,27 +447,6 @@
     
     
       <category term="随笔" scheme="https://kkkiona.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://kkkiona.github.io/2019/04/03/hello-world/"/>
-    <id>https://kkkiona.github.io/2019/04/03/hello-world/</id>
-    <published>2019-04-03T03:37:59.399Z</published>
-    <updated>2019-04-03T03:37:59.399Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
     
   </entry>
   
