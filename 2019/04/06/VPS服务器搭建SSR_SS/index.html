@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="随笔,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -99,20 +99,47 @@
 
 
 
-<meta name="description" content="搞了一天多博客 总算基本 把bug都弄好了 ，机器人 也弄山来了，但是跨域问题 影响了API接入，目前还是个小傻子。。。明天应该就能完成了，把之前的坑填了。">
-<meta name="keywords" content="随笔">
+<meta name="description" content="实在是忍受不了国内博客论坛千篇一律的抄袭现象，决定去翻阅一下国外的资料。但又因为国内现成的VPN基本全被封杀，即便是有几个可以用的也会收费并且非常不稳定，于是决定自己动手打一个梯子。服务器：vultr（比较实惠、稳定的国外服务器）工具：xshell、shadowstocks、bbr、代理服务设置工具（下边会给出链接）首先是搞到服务器，去vultr注册账号。https://www.vultr.com">
+<meta name="keywords" content="Web Security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图灵">
-<meta property="og:url" content="https://kkkiona.github.io/2019/04/14/图灵/index.html">
+<meta property="og:title" content="VPS服务器搭建SSR&#x2F;SS">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/06/VPS服务器搭建SSR_SS/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="搞了一天多博客 总算基本 把bug都弄好了 ，机器人 也弄山来了，但是跨域问题 影响了API接入，目前还是个小傻子。。。明天应该就能完成了，把之前的坑填了。">
+<meta property="og:description" content="实在是忍受不了国内博客论坛千篇一律的抄袭现象，决定去翻阅一下国外的资料。但又因为国内现成的VPN基本全被封杀，即便是有几个可以用的也会收费并且非常不稳定，于是决定自己动手打一个梯子。服务器：vultr（比较实惠、稳定的国外服务器）工具：xshell、shadowstocks、bbr、代理服务设置工具（下边会给出链接）首先是搞到服务器，去vultr注册账号。https://www.vultr.com">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190414211250896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-04-14T12:13:19.806Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406122622153.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406122759784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406123144107.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406123333893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406123524123.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406123616710.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406124119795.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406124423338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406131959999.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406132228249.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406132243313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406132459637.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019040613282333.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133049804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133226519.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133407621.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133439460.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133500237.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133716849.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019040613380186.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406133945778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406134056257.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406134500138.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406134641439.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406135045249.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406135231856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406135520652.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190406140207379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-04-09T04:13:49.394Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图灵">
-<meta name="twitter:description" content="搞了一天多博客 总算基本 把bug都弄好了 ，机器人 也弄山来了，但是跨域问题 影响了API接入，目前还是个小傻子。。。明天应该就能完成了，把之前的坑填了。">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190414211250896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="VPS服务器搭建SSR&#x2F;SS">
+<meta name="twitter:description" content="实在是忍受不了国内博客论坛千篇一律的抄袭现象，决定去翻阅一下国外的资料。但又因为国内现成的VPN基本全被封杀，即便是有几个可以用的也会收费并且非常不稳定，于是决定自己动手打一个梯子。服务器：vultr（比较实惠、稳定的国外服务器）工具：xshell、shadowstocks、bbr、代理服务设置工具（下边会给出链接）首先是搞到服务器，去vultr注册账号。https://www.vultr.com">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190406122622153.png">
 
 
   <script>
@@ -151,13 +178,13 @@
 
 
 
-  <link rel="canonical" href="https://kkkiona.github.io/2019/04/14/图灵/">
+  <link rel="canonical" href="https://kkkiona.github.io/2019/04/06/VPS服务器搭建SSR_SS/">
 
 
 
 
 
-  <title>图灵 | Kiona</title>
+  <title>VPS服务器搭建SSR/SS | Kiona</title>
   
 
 
@@ -296,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/14/图灵/">
+    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/06/VPS服务器搭建SSR_SS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kiona">
@@ -313,7 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图灵</h1>
+          <h1 class="post-title" itemprop="name headline">VPS服务器搭建SSR/SS</h1>
         
 
         <div class="post-meta">
@@ -325,8 +352,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T20:12:56+08:00">
-                2019-04-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-06T14:02:53+08:00">
+                2019-04-06
               </time>
             
 
@@ -343,7 +370,7 @@
 
           
           
-             <span id="/2019/04/14/图灵/" class="leancloud_visitors" data-flag-title="图灵">
+             <span id="/2019/04/06/VPS服务器搭建SSR_SS/" class="leancloud_visitors" data-flag-title="VPS服务器搭建SSR/SS">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  61
+                  976
                 </span>
               
 
@@ -389,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -410,7 +437,23 @@
       
 
       
-        <p>搞了一天多博客 总算基本 把bug都弄好了 ，机器人 也弄山来了，但是跨域问题 影响了API接入，目前还是个小傻子。。。明天应该就能完成了，把之前的坑填了。<br><img src="https://img-blog.csdnimg.cn/20190414211250896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+        <p>实在是忍受不了国内博客论坛千篇一律的抄袭现象，决定去翻阅一下国外的资料。但又因为国内现成的VPN基本全被封杀，即便是有几个可以用的也会收费并且非常不稳定，于是决定自己动手打一个梯子。<br>服务器：<strong>vultr</strong>（比较实惠、稳定的国外服务器）<br>工具：<strong>xshell</strong>、<strong>shadowstocks</strong>、<strong>bbr</strong>、<strong>代理服务设置工具</strong>（下边会给出链接）<br>首先是搞到服务器，去vultr注册账号。<a href="https://www.vultr.com/" target="_blank" rel="noopener">https://www.vultr.com/</a><br><img src="https://img-blog.csdnimg.cn/20190406122622153.png" alt="在这里插入图片描述"><br>填写邮箱和密码，会给你发个邮件激活账号。<br><a id="more"></a><br><img src="https://img-blog.csdnimg.cn/20190406122759784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先进性账户充值，充值最低10美元起。<br><img src="https://img-blog.csdnimg.cn/20190406123144107.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>倒数2、3分别是微信和支付宝，扫码支付就可以了。</p>
+<p>选择服务器<br><img src="https://img-blog.csdnimg.cn/20190406123333893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选一个适合你的（延迟低的服务器）推荐日本和美国。如果不清楚哪个延迟低可以去这里测试一下<br><a href="http://ga-us-ping.vultr.com/" target="_blank" rel="noopener">http://ga-us-ping.vultr.com/</a><br><img src="https://img-blog.csdnimg.cn/20190406123524123.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>ms越低越好。</p>
+<p>选择系统和机器<br><img src="https://img-blog.csdnimg.cn/20190406123616710.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由于我使用kali较多所以我选了Debian，无特殊需求选默认的CentOS就可以了。机器的话如果仅仅用来fan墙，最便宜的就足够了。</p>
+<p>后面的选项对此次的目的来说没有意义，因此全部采用的默认，具体功能自行了解。最后点击下方deploy now。</p>
+<p>这样我们就有了一台自己的海外服务器。<br><img src="https://img-blog.csdnimg.cn/20190406124119795.png" alt="在这里插入图片描述"><br>点击你的服务器进入详页可以看到你服务器IP和用户名、密码。后边会用到。<br><img src="https://img-blog.csdnimg.cn/20190406124423338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载xshell 链接：<a href="https://pan.baidu.com/s/11FRT_RPIVZjyvMkjx-zYbA" target="_blank" rel="noopener">https://pan.baidu.com/s/11FRT_RPIVZjyvMkjx-zYbA</a> 提取码：ffki<br>安装完毕后新建连接。<br><img src="https://img-blog.csdnimg.cn/20190406131959999.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>名字随意，主机号就是你申请的副武器的IP，端口一般默认22，可以自己修改。点击确定并连接主机。<br><img src="https://img-blog.csdnimg.cn/20190406132228249.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20190406132243313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>输入服务器的用户名密码。连接服务器。<br><img src="https://img-blog.csdnimg.cn/20190406132459637.png" alt="在这里插入图片描述"><br>如图表示连接成功。</p>
+<p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/hombo125/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure>
+<p>如果失败则先输入下面的指令再次运行上面的指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>运行完成后出现如下提示，输入数字1安装ssr服务端<br><img src="https://img-blog.csdnimg.cn/2019040613282333.png" alt="在这里插入图片描述"><br>输入端口和账号密码，端口的可选范围为60~65535。<br><img src="https://img-blog.csdnimg.cn/20190406133049804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择加密方式，输入对应数字即可，下面机几个操作的选择取决于个人，作者均采用默认设置。<br><img src="https://img-blog.csdnimg.cn/20190406133226519.png" alt="在这里插入图片描述"><br>协议插件<br><img src="https://img-blog.csdnimg.cn/20190406133407621.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190406133439460.png" alt="在这里插入图片描述"><br>设置混淆（通过代理玩游戏推荐第一个速度快一些）<br><img src="https://img-blog.csdnimg.cn/20190406133500237.png" alt="在这里插入图片描述"><br>设备限制空（回车）默认无限制，需要对访问速度加以限制的自己输入速率上限就行。<br><img src="https://img-blog.csdnimg.cn/20190406133716849.png" alt="在这里插入图片描述"><br>下载文件<br><img src="https://img-blog.csdnimg.cn/2019040613380186.png" alt="在这里插入图片描述"><br>安装完成后会显示相关信息，记得保存。<br><img src="https://img-blog.csdnimg.cn/20190406133945778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>若不慎关闭可以输入bash ssr.sh进入管理界面根据提示查看或者修改信息。<br><img src="https://img-blog.csdnimg.cn/20190406134056257.png" alt="在这里插入图片描述"><br>重启服务器，可以再界面输入reboot也可以在你的vultr管理界面里重启。</p>
+<p>安装BBR加速器，输入如下指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</span><br><span class="line">chmod +x bbr.sh</span><br><span class="line">./bbr.sh</span><br></pre></td></tr></table></figure>
+<p>按任意键安装。<br><img src="https://img-blog.csdnimg.cn/20190406134500138.png" alt="在这里插入图片描述"><br>完成后提示重启服务器选择Y或手动重启。重启后输入lsmod | grep bbr查看是否安装成功。<br><img src="https://img-blog.csdnimg.cn/20190406134641439.png" alt="在这里插入图片描述"><br>如上图安装成功。</p>
+<p>下载代理设置工具 链接：<a href="https://pan.baidu.com/s/1_68i7TxfdT4lv3Kupge2wQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1_68i7TxfdT4lv3Kupge2wQ</a> 提取码：z8jh </p>
+<p><img src="https://img-blog.csdnimg.cn/20190406135045249.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把之前保存的ssr配置信息填上。</p>
+<p>设置浏览器的代理服务，地址127.0.0.1端口1080。<br><img src="https://img-blog.csdnimg.cn/20190406135231856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>使用全局模式所有浏览器就都可以使用代理服务了。<br><img src="https://img-blog.csdnimg.cn/20190406135520652.png" alt="无需指定特殊访问"><br>Chrome可以使用自己的SwitchyOmega插件来定制自己的代理服务，但是这个插件的官方链接也被墙了，这里给出一个离线下载<a href="https://chrome-extension-downloader.com/。使用很简单实在不懂就Baidu一下吧。" target="_blank" rel="noopener">https://chrome-extension-downloader.com/。使用很简单实在不懂就Baidu一下吧。</a></p>
+<p>至此vps服务器搭建ssr/ss就完成了，效果。<br><img src="https://img-blog.csdnimg.cn/20190406140207379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
       
     </div>
@@ -442,12 +485,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/随笔/" rel="tag"><i class="fa fa-tag"></i> 随笔</a>
-          
-        </div>
-      
 
       
       
@@ -457,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/13/19-4-13/" rel="next" title="19-4-13">
-                <i class="fa fa-chevron-left"></i> 19-4-13
+              <a href="/2019/04/05/SVG 图片验证码解码/" rel="next" title="SVG 图片验证码解码">
+                <i class="fa fa-chevron-left"></i> SVG 图片验证码解码
               </a>
             
           </div>
@@ -466,6 +503,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/07/XSS 随笔01/" rel="prev" title="XSS 随笔">
+                XSS 随笔 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1368,13 +1409,13 @@ var talkAPI = "https://openapi.tuling123.com/openapi/api/v2";//如果有类似�
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = '图灵'.length > 0
+      var isPost = 'VPS服务器搭建SSR/SS'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = '图灵'
+        var title = 'VPS服务器搭建SSR/SS'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

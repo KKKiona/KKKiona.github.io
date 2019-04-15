@@ -561,41 +561,6 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/04/10/XSS-题目解析-（下篇）/" itemprop="url">
-              
-                <span itemprop="name">XSS 题目解析（下篇）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T10:56:59+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
             <a class="post-title-link" href="/2019/04/09/SQL-注入（UNION联合注入）/" itemprop="url">
               
                 <span itemprop="name">SQL 注入（UNION联合注入）</span>
@@ -631,16 +596,51 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/04/09/VPS服务器搭建SSR_SS/" itemprop="url">
+            <a class="post-title-link" href="/2019/04/09/XSS 题目解析 （下篇）/" itemprop="url">
               
-                <span itemprop="name">VPS服务器搭建SSR/SS</span>
+                <span itemprop="name">XSS 题目解析（下篇）</span>
               
             </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-09T10:56:59+08:00" content="2019-04-09">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-04-09T15:40:46+08:00" content="2019-04-09">
+          04-09
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/04/09/XSS 题目解析（上篇）/" itemprop="url">
+              
+                <span itemprop="name">XSS 题目解析（上篇）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-04-09T14:50:56+08:00" content="2019-04-09">
           04-09
         </time>
       </div>
@@ -802,6 +802,40 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
+		<div id="landlord" style="left:5px;bottom:0px;">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
+    <div class="live_talk_input_body">
+    	<div class="live_talk_input_name_body">
+        	<input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字">
+        </div>
+        <div class="live_talk_input_text_body">
+        	<input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？">
+            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
+        </div>
+    </div>
+    <input name="live_talk" id="live_talk" value="1" type="hidden">
+    <div class="live_ico_box">
+    	<div class="live_ico_item type_info" id="showInfoBtn"></div>
+    	<div class="live_ico_item type_talk" id="showTalkBtn"></div>
+        <div class="live_ico_item type_music" id="musicButton"></div>
+        <div class="live_ico_item type_youdu" id="youduButton"></div>
+        <div class="live_ico_item type_quit" id="hideButton"></div>
+        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden">
+        <audio src style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
+        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c52p4qbp15idv6bl55h381moha.mp3" type="hidden">
+        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c52p8frrlmf1aled1e14m56una.mp3" type="hidden">
+        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
+    </div>
+</div>
+<div id="open_live2d">召唤伊斯特瓦尔</div>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+var message_Path = '/live2d/';//资源目录，如果目录不对请更改
+var talkAPI = "https://openapi.tuling123.com/openapi/api/v2";//如果有类似图灵机器人的聊天接口请填写接口路径
+</script>
+<script type="text/javascript" src="live2d/js/live2d.js"></script>
+<script type="text/javascript" src="live2d/js/message.js"></script>
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart" aria-hidden="true"></i>
@@ -1518,7 +1552,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("图灵");titles.push("19-4-13");titles.push("Success");titles.push("随笔-19-04-12");titles.push("SSTI服务端模板注入");titles.push("随笔-19-4-11");titles.push("PHP 漏洞");titles.push("XSS 题目解析（下篇）");titles.push("SQL 注入（UNION联合注入）");titles.push("VPS服务器搭建SSR/SS");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("图灵");titles.push("19-4-13");titles.push("Success");titles.push("随笔-19-04-12");titles.push("SSTI服务端模板注入");titles.push("随笔-19-4-11");titles.push("PHP 漏洞");titles.push("SQL 注入（UNION联合注入）");titles.push("XSS 题目解析（下篇）");titles.push("XSS 题目解析（上篇）");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -1548,40 +1582,5 @@
 
   
 
-  
-  <div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-    	<div class="live_talk_input_name_body">
-        	<input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字">
-        </div>
-        <div class="live_talk_input_text_body">
-        	<input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？">
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
-    </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden">
-    <div class="live_ico_box">
-    	<div class="live_ico_item type_info" id="showInfoBtn"></div>
-    	<div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden">
-        <audio src style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c52p4qbp15idv6bl55h381moha.mp3" type="hidden">
-        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c52p8frrlmf1aled1e14m56una.mp3" type="hidden">
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
-    </div>
-</div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
-<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>
-var message_Path = '/live2d/';//资源目录，如果目录不对请更改
-var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图灵机器人的聊天接口请填写接口路径
-</script>
-<script type="text/javascript" src="live2d/js/live2d.js"></script>
-<script type="text/javascript" src="live2d/js/message.js"></script>
 </body>
 </html>
