@@ -289,9 +289,6 @@ if(!norunFlag){
 					url: talkAPI,
 					type: 'POST',
 					dataType: 'json',
-					headers:{
-						"Access-Control-Allow-Origin:http://openapi.tuling123.com/openapi/"
-						},
 					data: {
 						"reqType":0,
 						"perception": {
@@ -307,7 +304,7 @@ if(!norunFlag){
 					success: function(res) {
 						if(false){
 							talkValTimer();
-							showMessage('似乎有什么错误，请和站长联系！',0);
+							showMessage('图灵错误！',0);
 						}else{
 							talkValTimer();
 							showMessage(res.values,0);
@@ -317,7 +314,7 @@ if(!norunFlag){
 						sessionStorage.setItem("live2duser", userid_);
 					},
 					error:function(result){
-						showMessage('似乎有什么错误，请和站长联系！',0);
+						showMessage('连接错误',0);
 					}	
 				});
 			});
