@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[流量分析题]]></title>
+    <url>%2F2019%2F04%2F20%2F%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[这是一一道基础的流量分析题目，从题目可以得到一个pcapng数据包文件，可以通过wireshark来查看抓包数据。（https://www.wireshark.org/） 题目提示注意http字段，我们可以在过滤器里面输入http进行过滤。 可以看到传输了许多数据，有html文件，ico等，最引人瞩目的因该是最后变得png文件了。 通过对照常用文件的16进制开头也可以看出这里确实有一个png文件。 1234567891011121314151617181920212223242526272829JPEG (jpg)，文件头：FFD8FFPNG (png)，文件头：89504E47GIF (gif)，文件头：47494638TIFF (tif)，文件头：49492A00Windows Bitmap (bmp)，文件头：424DCAD (dwg)，文件头：41433130Adobe Photoshop (psd)，文件头：38425053Rich Text Format (rtf)，文件头：7B5C727466XML (xml)，文件头：3C3F786D6CHTML (html)，文件头：68746D6C3EEmail [thorough only] (eml)，文件头：44656C69766572792D646174653AOutlook Express (dbx)，文件头：CFAD12FEC5FD746FOutlook (pst)，文件头：2142444EMS Word/Excel (xls.or.doc)，文件头：D0CF11E0MS Access (mdb)，文件头：5374616E64617264204AWordPerfect (wpd)，文件头：FF575043Adobe Acrobat (pdf)，文件头：255044462D312EQuicken (qdf)，文件头：AC9EBD8FWindows Password (pwl)，文件头：E3828596ZIP Archive (zip)，文件头：504B0304RAR Archive (rar)，文件头：52617221Wave (wav)，文件头：57415645AVI (avi)，文件头：41564920Real Audio (ram)，文件头：2E7261FDReal Media (rm)，文件头：2E524D46MPEG (mpg)，文件头：000001BAMPEG (mpg)，文件头：000001B3Quicktime (mov)，文件头：6D6F6F76Windows Media (asf)，文件头：3026B2758E66CF11 wireshark提供了一个功能可以直接提取数据包里的文件，文件-&gt;导出对象-&gt;HTTP。 选择最后的png图片保存。 找到flag]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[docx文件]]></title>
     <url>%2F2019%2F04%2F18%2Fdocx%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[这是一道基础题，旨在考察Word docx 文件的本质。 题目给出了一个docx文件，里面是一段文言文。解题关键在于了解什么是docx。 docx是Microsoft Office2007之后版本使用的，用新的基于XML的压缩文件格式取代了其目前专有的默认文件格式，在传统的文件名扩展名后面添加了字母“x”（即“.docx”取代“.doc”、“.xlsx”取代“.xls”、“.pptx”取代“.ppt”）。docx文件比doc文件所占用空间更小 。 docx格式的文件本质上是一个ZIP文件。将一个docx文件的后缀改为ZIP后是可以用解压工具打开或是解压的。事实上，Word2007的基本文件就是ZIP格式的，他可以算作是docx文件的容器。docx 格式文件的主要内容是保存为XML格式的，但文件并非直接保存于磁盘。它是保存在一个ZIP文件中，然后取扩展名为docx。将.docx 格式的文件后缀改为ZIP后解压, 可以看到解压出来的文件夹中有word这样一个文件夹，它包含了Word文档的大部分内容。而其中的document.xml文件则包含了文档的主要文本内容。（摘自百度百科） 文档说的很清楚，docx文件是对doc文件的升级，是xml的压缩文件格式，实质上就是一个可以被office等文件使用的zip压缩包。 那我们把题目文件改成zip格式看一下可以看到flag文件，同时也可以找到文档内容文件]]></content>
