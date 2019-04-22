@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kkkiona.github.io/"/>
-  <updated>2019-04-21T02:59:09.337Z</updated>
+  <updated>2019-04-22T08:30:52.237Z</updated>
   <id>https://kkkiona.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>压缩文件明文攻击</title>
+    <link href="https://kkkiona.github.io/2019/04/22/%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/"/>
+    <id>https://kkkiona.github.io/2019/04/22/压缩文件明文攻击/</id>
+    <published>2019-04-22T08:26:16.000Z</published>
+    <updated>2019-04-22T08:30:52.237Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>题目</strong></p><p><img src="/2019/04/22/压缩文件明文攻击/Image0001.png" alt><br>是一个加密的压缩文件，包含了sqlmap工具和secret.txt文件。本体的解法为明文攻击。<br><a id="more"></a><br>明文攻击的意思就是假如你知道一个文件没有加密前的数据是X，加密后的文件为Y，那么就可以运算出其中的加密方式。</p><p>因此我们需要获取压缩文件里面的至少一个同版本的文件和一个可以使用明文攻击的工具。</p><p>显然secret.txt我们无法获得相同文件，但是sqlmap是可以从网上获取相同版本的。本题其实提供了同版本的sqlmap原文件，因为老版本的工具确实不好下载，我通过Baidu、Google搜索也确实没找到完全契合的版本，只找到了大版本相同的文件。</p><p>下载提供的原文件，注意这里的原文件已经打包好了，如果没有打包的需要打包为加密文件同格式的压缩文件。</p><p><strong>方法一</strong></p><p>使用 ARCHPR。<br>链接：<a href="https://pan.baidu.com/s/16lv7jBqJCZK9ukxtgICV5A" target="_blank" rel="noopener">https://pan.baidu.com/s/16lv7jBqJCZK9ukxtgICV5A</a><br>提取码：rp7v </p><p>这是Windows系统下非常好用的压缩包破解工具，具有明文攻击，暴力破解等模式。</p><p><img src="/2019/04/22/压缩文件明文攻击/Image0002.png" alt></p><p>选择加密文件、攻击方式、明文文件，点击开始即可。等待时间比较漫长。最后将结果保存出来就可以了。<br><img src="/2019/04/22/压缩文件明文攻击/Image0003.png" alt><br><img src="/2019/04/22/压缩文件明文攻击/Image0004.png" alt></p><p><strong>提示</strong><br> ARCHPR默认会进行多个项目的破解，其实第一个项目完成后即可停止，如下图所示，虽然没有找到密码，但是已经找到加密密钥，也就是说文件已经可以提取出来了，只是还不知道密码。点击保存即可。<br><img src="/2019/04/22/压缩文件明文攻击/Image0005.png" alt></p><p><strong>方法二</strong><br>使用 PkCrack。Linux下的软件，也有win版但不推荐。</p><p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.unix-ag.uni-kl.de/~conrad/krypto/pkcrack/pkcrack-1.2.2.tar.gz tar xzf pkcrack-1.2.2.tar.gz cd pkcrack-1.2.2/src make</span><br></pre></td></tr></table></figure></p><p>安装完成后会有一个pkcrack文件，需要目录里面有这个文件才可以使用指令，一般会把它copy到bin文件夹里，也可以根据自己需要，由于我是用的虚拟机共享文件夹，我就直接把它扔共享文件夹里了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ../../bin </span><br><span class="line">cp pkcrack ../../bin </span><br><span class="line">cd ../../</span><br></pre></td></tr></table></figure></p><p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./pkcrack –c sqlmap_1.1.10.py  –p sqlmap.py –C sqlmap.zip –P sqlmap_plain.zip -d sqlmap_decrypted.zip</span><br></pre></td></tr></table></figure></p><ul><li><p>C : 要破解的目标文件（含路径）</p></li><li><p>c ：破解文件中的明文文件的名字（其路径不包括系统路径，从zip文件一层开始）</p></li><li><p>P ：压缩后的明文文件</p></li><li><p>p : 压缩的明文文件中明文文件的名字（也就是readme.txt在plain.zip中的位置）</p></li><li><p>d : 最后得到的没有加密的zip文件</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;题目&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/04/22/压缩文件明文攻击/Image0001.png&quot; alt&gt;&lt;br&gt;是一个加密的压缩文件，包含了sqlmap工具和secret.txt文件。本体的解法为明文攻击。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>数据包文件包含</title>
