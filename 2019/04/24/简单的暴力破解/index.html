@@ -97,30 +97,22 @@
 
 
 
-<meta name="description" content="环境说明：Python 3外部依赖：requests、bs4、BeautifulSoup先看题目 题目很简单，就是限时计算给出的算式并提交。方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。方法二、使用网络爬虫。爬虫的话自然使用Python是最方便不过的，大体思路就是抓取公式-&amp;gt;计算-&amp;gt;提交。既然是做题那么首先第一步肯定是化简，做题最讨">
+<meta name="description" content="题目 题目给出了一个flag.zip文件，并且说文件使用了8位生日号作为密码。">
 <meta name="keywords" content="Web Security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python 简单的网页抓取和提交表单">
-<meta property="og:url" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/index.html">
+<meta property="og:title" content="简单的暴力破解">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/24/简单的暴力破解/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="环境说明：Python 3外部依赖：requests、bs4、BeautifulSoup先看题目 题目很简单，就是限时计算给出的算式并提交。方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。方法二、使用网络爬虫。爬虫的话自然使用Python是最方便不过的，大体思路就是抓取公式-&amp;gt;计算-&amp;gt;提交。既然是做题那么首先第一步肯定是化简，做题最讨">
+<meta property="og:description" content="题目 题目给出了一个flag.zip文件，并且说文件使用了8位生日号作为密码。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0001.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0002.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0003.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0004.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0005.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0006.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0007.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0008.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0009.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0010.png">
-<meta property="og:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0011.png">
-<meta property="og:updated_time" content="2019-04-15T06:07:57.961Z">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/24/简单的暴力破解/Image0001.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/24/简单的暴力破解/Image0002.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/24/简单的暴力破解/Image0003.png">
+<meta property="og:updated_time" content="2019-04-24T15:23:02.680Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 简单的网页抓取和提交表单">
-<meta name="twitter:description" content="环境说明：Python 3外部依赖：requests、bs4、BeautifulSoup先看题目 题目很简单，就是限时计算给出的算式并提交。方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。方法二、使用网络爬虫。爬虫的话自然使用Python是最方便不过的，大体思路就是抓取公式-&amp;gt;计算-&amp;gt;提交。既然是做题那么首先第一步肯定是化简，做题最讨">
-<meta name="twitter:image" content="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/Image0001.png">
+<meta name="twitter:title" content="简单的暴力破解">
+<meta name="twitter:description" content="题目 题目给出了一个flag.zip文件，并且说文件使用了8位生日号作为密码。">
+<meta name="twitter:image" content="https://kkkiona.github.io/2019/04/24/简单的暴力破解/Image0001.png">
 
 
   <script>
@@ -159,13 +151,13 @@
 
 
 
-  <link rel="canonical" href="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/">
+  <link rel="canonical" href="https://kkkiona.github.io/2019/04/24/简单的暴力破解/">
 
 
 
 
 
-  <title>Python 简单的网页抓取和提交表单 | Kiona</title>
+  <title>简单的暴力破解 | Kiona</title>
   
 
 
@@ -304,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/">
+    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/24/简单的暴力破解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kiona">
@@ -321,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python 简单的网页抓取和提交表单</h1>
+          <h1 class="post-title" itemprop="name headline">简单的暴力破解</h1>
         
 
         <div class="post-meta">
@@ -333,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-07T20:56:59+08:00">
-                2019-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-24T23:22:14+08:00">
+                2019-04-24
               </time>
             
 
@@ -351,7 +343,7 @@
 
           
           
-             <span id="/2019/04/07/Python-简单的网页抓取和提交表单/" class="leancloud_visitors" data-flag-title="Python 简单的网页抓取和提交表单">
+             <span id="/2019/04/24/简单的暴力破解/" class="leancloud_visitors" data-flag-title="简单的暴力破解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  983
+                  87
                 </span>
               
 
@@ -397,7 +389,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  1
                 </span>
               
             </div>
@@ -418,25 +410,15 @@
       
 
       
-        <p>环境说明：<strong>Python 3</strong><br>外部依赖：<strong>requests、bs4、BeautifulSoup</strong><br>先看题目</p>
-<p><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0001.png" alt><br>题目很简单，就是限时计算给出的算式并提交。<br><del>方法一、计算器一台。方法很简单只需要在1.5s内计算出结果再提交就行了，大约几千左右的APM就够了。</del><br>方法二、<strong>使用网络爬虫</strong>。<br>爬虫的话自然使用Python是最方便不过的，大体思路就是<strong>抓取公式-&gt;计算-&gt;提交</strong>。<br>既然是做题那么首先第一步肯定是<strong>化简</strong>，做题最讨厌的不是不会做而是把1+1做成∞+∞。我们先多刷新几次页面看一下。<br><a id="more"></a><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0002.png" alt><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0003.png" alt><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0004.png" alt><br>可以很明显看到公式采用的是x1+x2*x3-x4的固定格式。那这就简单多了，不需要判断运算符也不用修改运算顺序，直接省去了一个heap的工作量。再来看一下代码。<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0005.png" alt><br>可以看到表单使用Get传值，传递对象是自己。<strong>GET使用URL传递参数</strong>，来测试一下URL。<br>提交前：<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0006.png" alt><br>提交后：<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0007.png" alt><br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0008.png" alt><br>可以看到answer的值被脚本通过URL捕获并显示相关内容。<br>现在的工作具体为抓取<strong>抓取公式-&gt;计算-&gt;生成URL-&gt;提交</strong><br>先来完成前两步工作：<br><strong>新建一个py文件，引入抓包用的requests和分析HTML结构的bs4.</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br></pre></td></tr></table></figure>
-<p><strong>向指定页面发送GET请求并获取响应</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/&quot;)</span><br></pre></td></tr></table></figure>
-<p><strong>得到的response响应可以以content（二进制流）、text（文本）等多种格式输出，作为文本的时候还可以指定编码格式。<br>现以text格式输出一下看看结果。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0009.png" alt><br><strong>毫无疑问我们成功抓到了页面内容。下面需要获取公式。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">soup = BeautifulSoup(response.text, &quot;html.parser&quot;)</span><br><span class="line"></span><br><span class="line">getString = soup.find(id=&quot;exp&quot;).string</span><br><span class="line"></span><br><span class="line">Sum = int(getString.split()[2])</span><br><span class="line">Sum *= int(getString.split()[4])</span><br><span class="line">Sum += int(getString.split()[0])</span><br><span class="line">Sum -= int(getString.split()[6])</span><br></pre></td></tr></table></figure>
-<p><strong>先把获取的文本转成BeautifulSoup对象，通过字符串截取和强制转换变成单个数字并计算。由于已经确定运算符和运算规则这里就容易很多。然后把答案插入到URL并发送GET请求</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/calculator/?answer=&quot; + &apos;%d&apos; % Sum)</span><br></pre></td></tr></table></figure>
-<p>然后你会发现<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0010.png" alt><br>提示问题页面还未建立，没有问题何来答案。<br>简述一下HTTP请求的规则：<strong>HTTP请求的三次握手</strong><br>客户端向服务端发送syn=1，seq=client请求的ID;<br>服务端向客户端发送syn=1,seq=服务端请求的ID,ack=客户端请求的ID+1;<br>客户端向服务端发送syn=0,seq=客户端请求的ID+1,ack=服务端请求的ID+1,data\data…<br>所以简单来说就是HTTP向服务器发送请求时会有一个专属ID来让服务器和客户端保持连接，这个ID存在于cookies里面。如果不连同cookies发送给服务器，那么服务器就会认为是两个不同的客户发送的请求从而出现上面的错误。所以我们要做的是<strong>连同cookies一起发送。</strong><br><strong>先从response里面获取cookies并保存。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookies = response.cookies</span><br></pre></td></tr></table></figure>
-<p><strong>修改二次请求</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(&quot;http://example.com/?answer=&quot; + &apos;%d&apos; % Sum, cookies=Cookies)</span><br></pre></td></tr></table></figure>
-<p>再来看一下结果<br><img src="/2019/04/07/Python-简单的网页抓取和提交表单/Image0011.png" alt><br>成功！<br>总结：<strong>这道题比较基础，简单的使用了Python的爬虫功能，主要是学习了HTTP请求的过程，关键在于cookies的传递。</strong></p>
-<p><strong>忘记放出完整代码了，补上！</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">response = requests.get(&quot;http://123.207.149.64:23331/calculator/&quot;)</span><br><span class="line">Cookies = response.cookies</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(response.text, &quot;html.parser&quot;)</span><br><span class="line"></span><br><span class="line">getString = soup.find(id=&quot;exp&quot;).string</span><br><span class="line"></span><br><span class="line">Sum = int(getString.split()[2])</span><br><span class="line">Sum *= int(getString.split()[4])</span><br><span class="line">Sum += int(getString.split()[0])</span><br><span class="line">Sum -= int(getString.split()[6])</span><br><span class="line"></span><br><span class="line">response = requests.get(&quot;http://123.207.149.64:23331/calculator/?answer=&quot; + &apos;%d&apos; % Sum, cookies=Cookies)</span><br><span class="line"></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-<p>后面打算写一篇关于POST传递的使用方式和详细的HTTP请求的相关知识</p>
+        <p><strong>题目</strong></p>
+<p>题目给出了一个flag.zip文件，并且说文件使用了8位生日号作为密码。</p>
+<p><img src="/2019/04/24/简单的暴力破解/Image0001.png" alt><br><a id="more"></a></p>
+<p>由于是纯数字组和而且知道位数可以使用暴力破解，这里我使用的工具是ARCHPR。</p>
+<p>链接：<a href="https://pan.baidu.com/s/16lv7jBqJCZK9ukxtgICV5A" target="_blank" rel="noopener">https://pan.baidu.com/s/16lv7jBqJCZK9ukxtgICV5A</a><br>提取码：rp7v</p>
+<p>选择暴力破解，纯数字00000000-99999999。</p>
+<p><img src="/2019/04/24/简单的暴力破解/Image0002.png" alt></p>
+<p>完成！</p>
+<p><img src="/2019/04/24/简单的暴力破解/Image0003.png" alt></p>
 
       
     </div>
@@ -457,35 +439,6 @@
 	<div>
       
         
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/04/07/Python-简单的网页抓取和提交表单/">Python 简单的网页抓取和提交表单</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 Kiona 的个人博客">Kiona</a></p>
-  <p><span>发布时间:</span>2019年04月07日 - 20:04</p>
-  <p><span>最后更新:</span>2019年04月15日 - 14:04</p>
-  <p><span>原始链接:</span><a href="/2019/04/07/Python-简单的网页抓取和提交表单/" title="Python 简单的网页抓取和提交表单">https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://kkkiona.github.io/2019/04/07/Python-简单的网页抓取和提交表单/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({   
-          title: "",   
-          text: '复制成功',
-          icon: "success", 
-          showConfirmButton: true
-          });
-    });
-    });  
-</script>
-
       
 	</div>
 
@@ -506,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/07/关于Python的使用/" rel="next" title="关于Python的使用">
-                <i class="fa fa-chevron-left"></i> 关于Python的使用
+              <a href="/2019/04/23/终端命令/" rel="next" title="终端命令">
+                <i class="fa fa-chevron-left"></i> 终端命令
               </a>
             
           </div>
@@ -515,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/08/XSS-题目解析-（上篇）/" rel="prev" title="XSS 题目解析（上篇）">
-                XSS 题目解析（上篇） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1413,13 +1362,13 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = 'Python 简单的网页抓取和提交表单'.length > 0
+      var isPost = '简单的暴力破解'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = 'Python 简单的网页抓取和提交表单'
+        var title = '简单的暴力破解'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
