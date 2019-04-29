@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[使用vultr+hexo搭建博客添加图灵机器人]]></title>
+    <url>%2F2019%2F04%2F29%2F%E4%BD%BF%E7%94%A8vultr-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%81%B5%E6%9C%BA%E5%99%A8%E4%BA%BA%2F</url>
+    <content type="text"><![CDATA[鉴于GitHub的访问很慢，于是购买了服务器和域名，刚搭建好博客还未完工。。稍后撰写具体内容。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[简单的解码]]></title>
     <url>%2F2019%2F04%2F27%2F%E7%AE%80%E5%8D%95%E7%9A%84%E8%A7%A3%E7%A0%81%2F</url>
     <content type="text"><![CDATA[题目题目给出了一堆数字，范围是0-9，由数字组成的编码最容易想到的就是ASCII码，由于出现了8，9显然不能是8进制。对照ASCII码表发现两两一组的话所有编码恰好范围位于30-39，看成16进制的话解码之后也全部都是0-9的数字，猜测出题者可能进行了多次编码。写脚本（C语言）12345678910111213141516171819202122232425262728293031323334#include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;int main()&#123; fstream fin(&quot;原来的文件&quot;); ofstream fout(&quot;输出后的文件); int i, sum = 0; char c; for (i = 0; fin &gt;&gt; c; ++i) &#123; if (i % 2) &#123; if (c &gt;= &apos;A&apos; &amp;&amp; c &lt;= &apos;Z&apos;) sum += 10 + c - &apos;A&apos;; else sum += c - &apos;0&apos;; fout &lt;&lt; char(sum); sum = 0; &#125; else &#123; if (c &gt;= &apos;A&apos; &amp;&amp; c &lt;= &apos;Z&apos;) sum += 10 + c - &apos;A&apos;; else sum += c - &apos;0&apos;; sum *= 16; &#125; &#125; fin.close(); fout.close();&#125; （后面会出现带有A-F的16进制编码所以提前把判断写进去了） 输出文件 果然和预想的一样，再次解码。 出现A-F不过依然符合16进制，继续解码 得到base编码，使用base解码。 http://tomeko.net/online_tools/base64.php?lang=en（推荐在线解码） 首先尝试base64，得到 再次使用base64出现乱码，换base32 之后不断使用base64或base32解码，最终会重新回到纯数字，然后再使用16进制，总之根据编码不断使用这三种解码方式，最终经过多次循环后得到flag。]]></content>

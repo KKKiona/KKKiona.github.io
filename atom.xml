@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kkkiona.github.io/"/>
-  <updated>2019-04-27T03:29:54.814Z</updated>
+  <updated>2019-04-29T15:13:52.737Z</updated>
   <id>https://kkkiona.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用vultr+hexo搭建博客添加图灵机器人</title>
+    <link href="https://kkkiona.github.io/2019/04/29/%E4%BD%BF%E7%94%A8vultr-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%81%B5%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    <id>https://kkkiona.github.io/2019/04/29/使用vultr-hexo搭建博客添加图灵机器人/</id>
+    <published>2019-04-29T15:08:46.000Z</published>
+    <updated>2019-04-29T15:13:52.737Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>鉴于GitHub的访问很慢，于是购买了服务器和域名，刚搭建好博客还未完工。。稍后撰写具体内容。<br><img src="/2019/04/29/使用vultr-hexo搭建博客添加图灵机器人/123.png" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>简单的解码</title>
@@ -404,24 +425,6 @@
 &lt;p&gt;知道了怎么获取这个验证码现在开始解题。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第一题：Baby XSS&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/2019/04/08/XSS-题目解析-（上篇）/Image0002.png&quot; alt&gt;&lt;br&gt;根据题目描述，我们需要以admin的身份访问admin.php才能获取里面的flag。先点开admin.php看一下&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>关于Python的使用</title>
-    <link href="https://kkkiona.github.io/2019/04/07/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://kkkiona.github.io/2019/04/07/关于Python的使用/</id>
-    <published>2019-04-07T12:56:59.000Z</published>
-    <updated>2019-04-15T06:08:11.191Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。<br>首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。<br>下面是一些安装问题，你可以去官网下载Python 3并安装，<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a>  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，<a href="https://www.anaconda.com/" target="_blank" rel="noopener">https://www.anaconda.com/</a>  提供了 Python 2，Python 3 两个版本。<br>关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。<a href="https://thonny.org/" target="_blank" rel="noopener">https://thonny.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0001.png" alt><br><a id="more"></a><br>比较常见的是pyCharm，操作模式类似于eclipse，功能强大代，码高亮，自动填写做的很好。项目管理很方便，可以跨平台。可以很方便的管理库文件，添加外部依赖等等。提供了免费及收费两个版本。没什么大缺点，就是对外部包引入的搜索方式有时候会让人头大。明明项目里都显示有package了就是import不进来。<a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/download/#section=windows</a><br><img src="/2019/04/07/关于Python的使用/Image0002.png" alt><br>另外推荐一个交互式笔记本，Jupyter notebook（又称IPython notebook）支持运行超过40种编程语言。安装教程十分简单。跨平台，实时代码编辑。缺点，关键词高亮很差，语法检测很弱，有时候错误语法照样可以运行。<a href="https://jupyter.org/" target="_blank" rel="noopener">https://jupyter.org/</a><br><img src="/2019/04/07/关于Python的使用/Image0003.png" alt><br>对于热衷文本编辑器的人员可以使用sublime，另外C、Java程序员可以使用vs和eclipse。Linux推荐vim。<br>关于同时使用Python 2 和 Python 3，如果确实需要两个环境的话。可以参考这篇文章<a href="https://www.cnblogs.com/zhengyihan1216/p/6011640.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhengyihan1216/p/6011640.html</a><br>简述一下就是安装第一个Python的时候记得把Python.exe改个别名，并且使用pip的时候要对应Python版本，最后分别添加path就可以了。<br>下一篇介绍如何简单的使用 requests package抓取页面和表单提交。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天遇到了一道网络爬虫的题目，于是便重新拾起了N年前自己学习的Python 2，下面就说一下Python的相关问题。&lt;br&gt;首先关于Python版本的问题，虽然Python 2 ，Python 3 都在更新，而且据统计显示有70%以上的作者仍在使用Python 2，但是真的非常强烈推荐Python 3。Python 3 不仅仅是对语法做了优化，而且对许多库做了改进、合并。比如Python 2 的urllib和urllib2 在Python 3 中合并为了urllib（其实都不如request）。总之Python 3 是非常值得使用的。&lt;br&gt;下面是一些安装问题，你可以去官网下载Python 3并安装，&lt;a href=&quot;https://www.python.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.python.org/&lt;/a&gt;  Python 3 的Windows安装包是可以勾选path环境变量的无需手动设置。但相比这样我更推荐使用 anaconda 集成包，里面包含了许多科学包及其依赖，同样是一键安装并且可以自动配置环境变量，&lt;a href=&quot;https://www.anaconda.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.anaconda.com/&lt;/a&gt;  提供了 Python 2，Python 3 两个版本。&lt;br&gt;关于编辑器，新手可以使用Thonny，十分小巧简洁的Python 编辑器，没有复杂的工程模块，打开软件写就完了，并且自带了Python环境无需提前安装Python即可使用，也可以自己配置解释器。缺点是功能相对较弱。&lt;a href=&quot;https://thonny.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://thonny.org/&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/2019/04/07/关于Python的使用/Image0001.png&quot; alt&gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
