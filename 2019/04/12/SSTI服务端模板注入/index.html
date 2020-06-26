@@ -97,17 +97,32 @@
 
 
 
-<meta name="description" content="Information Security">
+<meta name="description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。">
 <meta name="keywords" content="Web Security">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kiona">
-<meta property="og:url" content="https://kkkiona.github.io/archives/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSTI服务端模板注入">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="Information Security">
+<meta property="og:description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0001.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0002.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0003.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0004.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0005.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0006.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0007.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0008.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0009.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0010.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0011.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0012.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0013.png">
+<meta property="og:updated_time" content="2019-04-15T06:07:53.715Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kiona">
-<meta name="twitter:description" content="Information Security">
+<meta name="twitter:title" content="SSTI服务端模板注入">
+<meta name="twitter:description" content="题目：Confusion 1**这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。">
+<meta name="twitter:image" content="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/Image0001.png">
 
 
   <script>
@@ -146,13 +161,13 @@
 
 
 
-  <link rel="canonical" href="https://kkkiona.github.io/archives/">
+  <link rel="canonical" href="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/">
 
 
 
 
 
-  <title>归档 | Kiona</title>
+  <title>SSTI服务端模板注入 | Kiona</title>
   
 
 
@@ -171,7 +186,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	<a href="https://github.com/KKKiona" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,391 +292,274 @@
           <div id="content" class="content">		  	  
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiona">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kiona">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">SSTI服务端模板注入</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-12T17:58:35+08:00">
+                2019-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 22 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
+             <span id="/2019/04/12/SSTI服务端模板注入/" class="leancloud_visitors" data-flag-title="SSTI服务端模板注入">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/29/使用vultr-hexo搭建博客添加图灵机器人/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">使用vultr+hexo搭建博客添加图灵机器人</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-29T23:08:46+08:00" content="2019-04-29">
-          04-29
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/简单的解码/" itemprop="url">
-              
-                <span itemprop="name">简单的解码</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T11:26:24+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/24/简单的暴力破解/" itemprop="url">
-              
-                <span itemprop="name">简单的暴力破解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-24T23:22:14+08:00" content="2019-04-24">
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p><strong>题目：</strong>Confusion 1**<br><img src="/2019/04/12/SSTI服务端模板注入/Image0001.png" alt><br>这道题目名字就叫 “困惑”，乍一看确实让人困惑，整个界面就是一张图片还有两个跳转，两个跳转还都是404。<br><a id="more"></a><br><img src="/2019/04/12/SSTI服务端模板注入/Image0002.png" alt><br>但其实有不是那么困惑，因为题目里写了QCTF2018。。。</p>
+<p>以下是我整个解这道题的完整过程，由于题目说明里面提示图片很关键，我首先查看的是图片，我知道Python是蛇的意思，所以我认为这道题必然牵扯Python。F12看到<br><img src="/2019/04/12/SSTI服务端模板注入/Image0003.png" alt><br>似乎没啥特别，下载下来看一下，因为我知道有些线索可能写在了图片属性里面，或者图片加密。<br><img src="/2019/04/12/SSTI服务端模板注入/Image0004.png" alt><br>似乎并无异样。用binwalk跑了一下也没有发现结果。由于知识有限并不清楚还有什么其它图片利用方法，于是我决定先把眼光转向其它线索，题目还提示要找到input的地方。我观察了一下主页面的HTML代码发现并没有被设置为“hidden”的隐藏input标签。</p>
+<p>然而在检查login.php的404的时候发现代码里有线索。<br><img src="/2019/04/12/SSTI服务端模板注入/Image0005.png" alt><br><img src="/2019/04/12/SSTI服务端模板注入/Image0006.png" alt><br>看来这个文件里面应该是有我们需要的flag。<br><img src="/2019/04/12/SSTI服务端模板注入/Image0007.png" alt><br>并访问不了。我猜测这个404页面可能做了伪装，虽然题目说了“Scanner is useless”。但是我还是决定用kali扫一下。当然结果肯定是没有什么有用的发现。（我的kali在U盘上，用的是live模式不好截图就不放出来了）。</p>
+<p>我猜测会不会这个页面隐藏了GET参数，可以用来登录之类的。我尝试给比较常见的变量名“user”传递一个值看看有什么反应。<br><img src="/2019/04/12/SSTI服务端模板注入/Image0008.png" alt><br>没什么反应。感觉有点手足无措，想到之前已经做过XSS和SQL注入的题了，应该不会用XSS来做，但是我决定还是试一下。输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/12/SSTI服务端模板注入/Image0009.png" alt><br>出乎意料的竟然执行了。尝试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">Var fso=new ActiveXObject(Scripting.FileSystemObject); </span><br><span class="line">Var f=fso.opentextfile(“http://example.com/opt/flag_example.txt”,1，true); </span><br><span class="line">s = f.ReadAll(); </span><br><span class="line">document.write(s);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/12/SSTI服务端模板注入/Image0010.png" alt><br>可以看到网站非常“委婉”的提示我们不要这么做。不过也就是说这么做也可以但是这里不提倡，之前做XSS的时候我就浏览过一些如何绕过这种弹窗保护机制，我觉得应该有可行之处，但是我还是希望能够按照正规步骤做题。</p>
+<p>最终限于知识贫乏我只能去搜一下QCTF的内容。竟然在里面发现了原题！！</p>
+<p>把源码粘上去发现，<br><img src="/2019/04/12/SSTI服务端模板注入/Image0011.png" alt><br>好了本文结束，这道题目具体做法就是搜一搜。</p>
+<p>~~那是不可能的。既然找到正确答案了我们就必须知其所以然。</p>
+<p>首先我们一开始的工作方向是正确的，我们已经找到了input点。但是这里用到了一个之前没有用过的注入技术。<strong>SSTI服务端门模板注入</strong>。</p>
+<p><strong>SSTI</strong>网上的资料并不多，我查阅了自己的一些书籍，只在专门的web安全书籍（黑客攻防技术宝典（web篇））里面才有相关介绍，可能我查阅不够仔细这个内容在其它书里面只是涵盖在了某个专题里面。</p>
+<p><strong>SSTI</strong>是针对模板进行攻击的。来看一个PHP模板的例子。</p>
+<p>什么是模板，为什么要使用模板？</p>
+<p>模板简单来说就是定义了一个通用的框架，但是框架里面的内容是动态解析的。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;title&gt;&#123;%$cont%&#125;&lt;/title&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个HTML框架里面包含一个title标签但是至于标签里面是什么，现在不知道。</p>
+<p>至于这个cont什么时候去填充，有两种。前端渲染，后端渲染。</p>
+<p>前端渲染就是服务器一股脑把信息给浏览器，浏览器对信息先解析成HTML代码在渲染。</p>
+<p>后端渲染是服务端把信息解析好了直接发给浏览器，浏览器仅进行渲染工作。</p>
+<p>譬如说我们上边的模板页面起名为“index.html”。后端执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$temp-&gt;display(&apos;index.html&apos;, array(&apos;cont&apos; =&gt; $_GET[&apos;title&apos;]));</span><br></pre></td></tr></table></figure>
+<p>这样页面的就变成“title”的值，比如是123，那么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;title&gt;123&lt;/title&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>这令我想到了之前学习的织梦CMS。很显然，凡事用到用户输入的如果不加以处理必然会造成类似XSS的漏洞。题目来看的话这里必然存在后端渲染的漏洞。测试一下，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;7*7&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/12/SSTI服务端模板注入/Image0012.png" alt><br>前端显示49，这是因为服务端把7*7进行了运算，像PHP的Twig模板不仅可以进行表达式运算还能输出变量的值，也可以用注释符的办法看看能不能输出注释内容来判断是否存在漏洞。由此来看模板漏洞也是因为么有对用户输入过滤引起的。</p>
+<p>不过看了答案之后还是省了很多步骤，比如那张图片暗示了Python，这里的404页面其实不是Apache+PHP的构架，也就是说这里使用的并不是PHP 诸如Twig的模板，而是Python Flask jinja2。</p>
+<p>这样我们只需要了解Flask jinja2的用法就可以找到植入payload的方法。<br>官文 <a href="http://docs.jinkan.org/docs/jinja2/" target="_blank" rel="noopener">http://docs.jinkan.org/docs/jinja2/</a> （其实不用看也可以因为只用到基本语法可以搜一下）</p>
+<p>构造payload。构造payload使用到了Python的内建属性 官文 <a href="https://docs.python.org/2/library/stdtypes.html#file-objects" target="_blank" rel="noopener">https://docs.python.org/2/library/stdtypes.html#file-objects</a><br>由于我的Python还在起步阶段，在参考了大量资料后还是不能完全对这个payload进行最正确的解释（从做题到写文已经一天半了一直在看这个payload），这里给出我认为比较全的一个解释 转载 <a href="https://www.freebuf.com/articles/web/98928.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/98928.html</a><br>简单说一下我的理解就是我们需要用一个类型变量比如说一个空字符串，使用<strong>class</strong>来获取它的类型，并通过<strong>mro</strong>来获取对象的继承类。然后通过索引获取我们目标对象，再用<strong>subclass</strong>列出所有类，通过索引找到“file”类，有了“file”对象后就能使用read()来读取文件了。</p>
+<p>所以payload代码是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40](&apos;/flag.txt&apos;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/12/SSTI服务端模板注入/Image0013.png" alt><br>获得flag。</p>
+<p>不过QCTF的答案还说到了过滤，虽然这道题目没有用到，但是说一下。</p>
+<p>比如题目对<strong>class</strong>做了过滤的话，可以使用request.args来绕过。这个东西是flask模板里面用于获取GET参数的一个功能，所以我们可以吧<strong>class</strong>定义为字符串变量通过request.args来获取这样就绕过了过滤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&apos;&apos;[request.args.a][request.args.b][2][request.args.c]()[40](&apos;/flag.txt&apos;)[request.args.d]()&#125;&#125;?a=__class__&amp;b=__mro__&amp;c=__subclasses__&amp;d=read</span><br></pre></td></tr></table></figure>
+<p>这个思想类似于之前XSS使用的截取字符串构造 script 的思想。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/23/终端命令/" itemprop="url">
-              
-                <span itemprop="name">终端命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-23T17:22:32+08:00" content="2019-04-23">
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/压缩文件明文攻击/" itemprop="url">
-              
-                <span itemprop="name">压缩文件明文攻击</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T16:26:16+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/21/数据包文件包含/" itemprop="url">
-              
-                <span itemprop="name">数据包文件包含</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-21T09:54:27+08:00" content="2019-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/20/流量分析题/" itemprop="url">
-              
-                <span itemprop="name">流量分析题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-20T15:42:36+08:00" content="2019-04-20">
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/18/docx文件/" itemprop="url">
-              
-                <span itemprop="name">docx文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T14:48:37+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/18/Exif隐写题/" itemprop="url">
-              
-                <span itemprop="name">Exif隐写题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T14:30:06+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/17/LSB-图片隐写/" itemprop="url">
-              
-                <span itemprop="name">LSB-图片隐写</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-17T19:22:18+08:00" content="2019-04-17">
-          04-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+	
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/04/12/SSTI服务端模板注入/">SSTI服务端模板注入</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Kiona 的个人博客">Kiona</a></p>
+  <p><span>发布时间:</span>2019年04月12日 - 17:04</p>
+  <p><span>最后更新:</span>2019年04月15日 - 14:04</p>
+  <p><span>原始链接:</span><a href="/2019/04/12/SSTI服务端模板注入/" title="SSTI服务端模板注入">https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://kkkiona.github.io/2019/04/12/SSTI服务端模板注入/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/PHP-漏洞/" rel="next" title="PHP 漏洞">
+                <i class="fa fa-chevron-left"></i> PHP 漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/15/PHP利用文件包含漏洞/" rel="prev" title="PHP利用文件包含漏洞">
+                PHP利用文件包含漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -669,6 +567,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -990,6 +892,10 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1528,13 +1434,13 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = ''.length > 0
+      var isPost = 'SSTI服务端模板注入'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = ''
+        var title = 'SSTI服务端模板注入'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -1542,7 +1448,7 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("使用vultr+hexo搭建博客添加图灵机器人");titles.push("简单的解码");titles.push("简单的暴力破解");titles.push("终端命令");titles.push("压缩文件明文攻击");titles.push("数据包文件包含");titles.push("流量分析题");titles.push("docx文件");titles.push("Exif隐写题");titles.push("LSB-图片隐写");' //if you have a better way to get titles of posts, please change it
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

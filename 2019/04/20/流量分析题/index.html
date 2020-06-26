@@ -97,17 +97,24 @@
 
 
 
-<meta name="description" content="Information Security">
+<meta name="description" content="这是一一道基础的流量分析题目，从题目可以得到一个pcapng数据包文件，可以通过wireshark来查看抓包数据。（https://www.wireshark.org/）">
 <meta name="keywords" content="Web Security">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kiona">
-<meta property="og:url" content="https://kkkiona.github.io/archives/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流量分析题">
+<meta property="og:url" content="https://kkkiona.github.io/2019/04/20/流量分析题/index.html">
 <meta property="og:site_name" content="Kiona">
-<meta property="og:description" content="Information Security">
+<meta property="og:description" content="这是一一道基础的流量分析题目，从题目可以得到一个pcapng数据包文件，可以通过wireshark来查看抓包数据。（https://www.wireshark.org/）">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/20/流量分析题/Image0001.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/20/流量分析题/Image0002.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/20/流量分析题/Image0003.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/20/流量分析题/Image0004.png">
+<meta property="og:image" content="https://kkkiona.github.io/2019/04/20/流量分析题/Image0005.png">
+<meta property="og:updated_time" content="2019-04-20T09:38:58.107Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kiona">
-<meta name="twitter:description" content="Information Security">
+<meta name="twitter:title" content="流量分析题">
+<meta name="twitter:description" content="这是一一道基础的流量分析题目，从题目可以得到一个pcapng数据包文件，可以通过wireshark来查看抓包数据。（https://www.wireshark.org/）">
+<meta name="twitter:image" content="https://kkkiona.github.io/2019/04/20/流量分析题/Image0001.png">
 
 
   <script>
@@ -146,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="https://kkkiona.github.io/archives/">
+  <link rel="canonical" href="https://kkkiona.github.io/2019/04/20/流量分析题/">
 
 
 
 
 
-  <title>归档 | Kiona</title>
+  <title>流量分析题 | Kiona</title>
   
 
 
@@ -171,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	<a href="https://github.com/KKKiona" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,391 +284,219 @@
           <div id="content" class="content">		  	  
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kkkiona.github.io/2019/04/20/流量分析题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiona">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kiona">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">流量分析题</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-20T15:42:36+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 22 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
+             <span id="/2019/04/20/流量分析题/" class="leancloud_visitors" data-flag-title="流量分析题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/29/使用vultr-hexo搭建博客添加图灵机器人/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">使用vultr+hexo搭建博客添加图灵机器人</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  341
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-29T23:08:46+08:00" content="2019-04-29">
-          04-29
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/简单的解码/" itemprop="url">
-              
-                <span itemprop="name">简单的解码</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T11:26:24+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/24/简单的暴力破解/" itemprop="url">
-              
-                <span itemprop="name">简单的暴力破解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-24T23:22:14+08:00" content="2019-04-24">
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>这是一一道基础的流量分析题目，从题目可以得到一个pcapng数据包文件，可以通过wireshark来查看抓包数据。（<a href="https://www.wireshark.org/）" target="_blank" rel="noopener">https://www.wireshark.org/）</a></p>
+<p><img src="/2019/04/20/流量分析题/Image0001.png" alt><br><a id="more"></a><br>题目提示注意http字段，我们可以在过滤器里面输入http进行过滤。</p>
+<p><img src="/2019/04/20/流量分析题/Image0002.png" alt></p>
+<p>可以看到传输了许多数据，有html文件，ico等，最引人瞩目的因该是最后变得png文件了。</p>
+<p><img src="/2019/04/20/流量分析题/Image0003.png" alt></p>
+<p>通过对照常用文件的16进制开头也可以看出这里确实有一个png文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">JPEG (jpg)，文件头：FFD8FF</span><br><span class="line">PNG (png)，文件头：89504E47</span><br><span class="line">GIF (gif)，文件头：47494638</span><br><span class="line">TIFF (tif)，文件头：49492A00</span><br><span class="line">Windows Bitmap (bmp)，文件头：424D</span><br><span class="line">CAD (dwg)，文件头：41433130</span><br><span class="line">Adobe Photoshop (psd)，文件头：38425053</span><br><span class="line">Rich Text Format (rtf)，文件头：7B5C727466</span><br><span class="line">XML (xml)，文件头：3C3F786D6C</span><br><span class="line">HTML (html)，文件头：68746D6C3E</span><br><span class="line">Email [thorough only] (eml)，文件头：44656C69766572792D646174653A</span><br><span class="line">Outlook Express (dbx)，文件头：CFAD12FEC5FD746F</span><br><span class="line">Outlook (pst)，文件头：2142444E</span><br><span class="line">MS Word/Excel (xls.or.doc)，文件头：D0CF11E0</span><br><span class="line">MS Access (mdb)，文件头：5374616E64617264204A</span><br><span class="line">WordPerfect (wpd)，文件头：FF575043</span><br><span class="line">Adobe Acrobat (pdf)，文件头：255044462D312E</span><br><span class="line">Quicken (qdf)，文件头：AC9EBD8F</span><br><span class="line">Windows Password (pwl)，文件头：E3828596</span><br><span class="line">ZIP Archive (zip)，文件头：504B0304</span><br><span class="line">RAR Archive (rar)，文件头：52617221</span><br><span class="line">Wave (wav)，文件头：57415645</span><br><span class="line">AVI (avi)，文件头：41564920</span><br><span class="line">Real Audio (ram)，文件头：2E7261FD</span><br><span class="line">Real Media (rm)，文件头：2E524D46</span><br><span class="line">MPEG (mpg)，文件头：000001BA</span><br><span class="line">MPEG (mpg)，文件头：000001B3</span><br><span class="line">Quicktime (mov)，文件头：6D6F6F76</span><br><span class="line">Windows Media (asf)，文件头：3026B2758E66CF11</span><br></pre></td></tr></table></figure>
+<p>wireshark提供了一个功能可以直接提取数据包里的文件，<strong>文件-&gt;导出对象-&gt;HTTP</strong>。</p>
+<p><img src="/2019/04/20/流量分析题/Image0004.png" alt></p>
+<p>选择最后的png图片保存。</p>
+<p><img src="/2019/04/20/流量分析题/Image0005.png" alt></p>
+<p>找到flag</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/23/终端命令/" itemprop="url">
-              
-                <span itemprop="name">终端命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-23T17:22:32+08:00" content="2019-04-23">
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/压缩文件明文攻击/" itemprop="url">
-              
-                <span itemprop="name">压缩文件明文攻击</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T16:26:16+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/21/数据包文件包含/" itemprop="url">
-              
-                <span itemprop="name">数据包文件包含</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-21T09:54:27+08:00" content="2019-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/20/流量分析题/" itemprop="url">
-              
-                <span itemprop="name">流量分析题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-20T15:42:36+08:00" content="2019-04-20">
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/18/docx文件/" itemprop="url">
-              
-                <span itemprop="name">docx文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T14:48:37+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/18/Exif隐写题/" itemprop="url">
-              
-                <span itemprop="name">Exif隐写题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T14:30:06+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/17/LSB-图片隐写/" itemprop="url">
-              
-                <span itemprop="name">LSB-图片隐写</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-17T19:22:18+08:00" content="2019-04-17">
-          04-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+	
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+	
+	<div>
+      
+        
+      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/docx文件/" rel="next" title="docx文件">
+                <i class="fa fa-chevron-left"></i> docx文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/21/数据包文件包含/" rel="prev" title="数据包文件包含">
+                数据包文件包含 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -669,6 +504,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -990,6 +829,10 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1528,13 +1371,13 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = ''.length > 0
+      var isPost = '流量分析题'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = ''
+        var title = '流量分析题'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -1542,7 +1385,7 @@ var talkAPI = "http://openapi.tuling123.com/openapi/api/v2";//如果有类似图
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("使用vultr+hexo搭建博客添加图灵机器人");titles.push("简单的解码");titles.push("简单的暴力破解");titles.push("终端命令");titles.push("压缩文件明文攻击");titles.push("数据包文件包含");titles.push("流量分析题");titles.push("docx文件");titles.push("Exif隐写题");titles.push("LSB-图片隐写");' //if you have a better way to get titles of posts, please change it
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
