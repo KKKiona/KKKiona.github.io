@@ -286,24 +286,36 @@ if(!norunFlag){
 				}
 				showMessage('思考中~', 0);
 				$.ajax({
-					type: 'POST',
 					url: talkAPI,
+					type: 'POST',
+					dataType: 'json',
 					data: {
-						"info":info_,
-						"userid":userid_
+						"reqType":0,
+						"perception": {
+							"inputText": {
+								"text": info_
+							}							
+						},
+						"userInfo": {
+							"apiKey": "39863e373ccf4f85a77d5529b9bf2280",
+							"userId": userid_
+						}
 					},
 					success: function(res) {
-						if(res.code !== 100000){
+						if(false){
 							talkValTimer();
-							showMessage('似乎有什么错误，请和站长联系！',0);
+							showMessage('出错啦！',0);
 						}else{
 							talkValTimer();
-							showMessage(res.text,0);
+							showMessage(res.values,0);
 						}
 						console.log(res);
 						$('#AIuserText').val("");
 						sessionStorage.setItem("live2duser", userid_);
-					}
+					},
+					error:function(result){
+						showMessage('跨域限制！',0);
+					}	
 				});
 			});
 		}else{
@@ -446,10 +458,7 @@ if(!norunFlag){
 	}
 	$(document).ready(function() {
 		var AIimgSrc = [
-			home_Path + message_Path + "model/histoire/histoire.1024/texture_00.png",
-			home_Path + message_Path + "model/histoire/histoire.1024/texture_01.png",
-			home_Path + message_Path + "model/histoire/histoire.1024/texture_02.png",
-			home_Path + message_Path + "model/histoire/histoire.1024/texture_03.png"
+			home_Path + message_Path + "model/koharu/moc/koharu.2048/texture_00.png"
 		]
 		var images = [];
 		var imgLength = AIimgSrc.length;
@@ -471,7 +480,7 @@ if(!norunFlag){
 						},1300);
 					}
 					setTimeout(function(){
-						loadlive2d("live2d", message_Path+"model/histoire/model.json");
+						loadlive2d("live2d", message_Path+"model/koharu/koharu.model.json");
 					},1000);
 					initLive2d ();
 					images = null;
